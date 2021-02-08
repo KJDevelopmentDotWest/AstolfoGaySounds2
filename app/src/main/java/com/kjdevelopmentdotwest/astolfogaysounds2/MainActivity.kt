@@ -9,19 +9,18 @@ import android.view.WindowManager
 import android.widget.Button
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 
 
 class MainActivity : AppCompatActivity() {
 
-    lateinit var  mainImage: ImageView
-    lateinit var shopButton: Button
+    private lateinit var  mainImage: ImageView
+    private lateinit var shopButton: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        mainImage = findViewById<ImageView>(R.id.imageView)
+        mainImage = findViewById<ImageView>(R.id.mainImage)
         shopButton = findViewById<Button>(R.id.shopButton)
 
         setUp()
@@ -55,13 +54,29 @@ class MainActivity : AppCompatActivity() {
 
         mainImage.setOnClickListener {
             View.OnClickListener {
-                ImageFactory.mergeScaleBitmaps(BitmapFactory.decodeResource(resources, R.drawable.astolfo), BitmapFactory.decodeResource(resources, R.drawable.astolfoface), 100f, 50f)
+                ImageFactory.mergeScaleBitmaps(
+                    BitmapFactory.decodeResource(
+                        resources,
+                        R.drawable.astolfo
+                    ), BitmapFactory.decodeResource(
+                        resources,
+                        R.drawable.astolfoface
+                    ), 100f, 50f
+                )
                 mainImage.setImageBitmap(ImageFactory.resultImage)
             }
         }
 
         shopButton.setOnClickListener{
-            ImageFactory.mergeScaleBitmaps(BitmapFactory.decodeResource(resources, R.drawable.astolfo), BitmapFactory.decodeResource(resources, R.drawable.astolfoface), 100f, 50f)
+            ImageFactory.mergeScaleBitmaps(
+                BitmapFactory.decodeResource(
+                    resources,
+                    R.drawable.astolfo
+                ), BitmapFactory.decodeResource(
+                    resources,
+                    R.drawable.astolfoface
+                ), 100f, 50f
+            )
             mainImage.setImageBitmap(ImageFactory.resultImage)
         }
     }
