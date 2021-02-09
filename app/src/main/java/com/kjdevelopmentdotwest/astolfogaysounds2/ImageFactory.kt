@@ -17,7 +17,7 @@ class ImageFactory {
 
         private fun getRes(){
             imageWidth = displayMetrics!!.widthPixels
-            imageHeight = displayMetrics!!.heightPixels - (24 + 50) * displayMetrics!!.density.toInt() // 24dp status bar 50dp bottom buttons
+            imageHeight = displayMetrics!!.heightPixels - (24 + 50 + 50) * displayMetrics!!.density.toInt() // 24dp status bar 50dp bottom buttons 50dp counter
         }
 
         fun scaleBitmap(src : Bitmap){
