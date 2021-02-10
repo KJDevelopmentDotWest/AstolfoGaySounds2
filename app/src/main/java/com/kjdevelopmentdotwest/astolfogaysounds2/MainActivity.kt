@@ -22,6 +22,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var mainImage: ImageView
     private lateinit var shopButton: Button
     private lateinit var clickCountTextView: TextView
+    private lateinit var moneyCountTextView: TextView
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -48,12 +49,13 @@ class MainActivity : AppCompatActivity() {
         mainImage = findViewById(R.id.mainImage)
         shopButton = findViewById(R.id.shopButton)
         clickCountTextView = findViewById(R.id.clickCountTextView)
+        moneyCountTextView = findViewById(R.id.moneyCountTextView)
 
         mainImage.setOnClickListener {
             UserData.clickCount++
             clickCountTextView.text = UserData.clickCount.toString()
             UserData.moneyCount++
-            UserData.saveProgress()
+            moneyCountTextView.text = UserData.moneyCount.toString()
         }
 
         shopButton.setOnClickListener{
@@ -80,8 +82,9 @@ class MainActivity : AppCompatActivity() {
     private fun setUpUserData(){
         UserData.context = this
         UserData.retrieveUserInfoFromFile()
-        //UserData.retrieveInfoFromString()
         clickCountTextView.text = UserData.clickCount.toString()
+        moneyCountTextView.text = UserData.moneyCount.toString()
+
     }
 
     private fun googleAccountCheck(){

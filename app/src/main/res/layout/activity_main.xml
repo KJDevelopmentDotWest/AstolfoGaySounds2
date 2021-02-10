@@ -13,19 +13,34 @@
         android:orientation="horizontal">
 
         <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:text="Clicks"
+            android:textSize="18dp" />
+
+        <TextView
             android:id="@+id/clickCountTextView"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
             android:layout_weight="1"
             android:text="TextView"
-            android:textSize="12sp"/>
+            android:textSize="18dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="50dp"
             android:layout_weight="1"
-            android:text="Count"
-            android:textSize="12sp" />
+            android:text="Coins"
+            android:textSize="18dp" />
+
+        <TextView
+            android:id="@+id/moneyCountTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:text="TextView"
+            android:textSize="18dp" />
 
     </LinearLayout>
 
