@@ -74,8 +74,15 @@ class MainActivity : AppCompatActivity() {
 
     private fun setUpImageFactory(){
         val displayMetrics = DisplayMetrics()
-        val windowManager = applicationContext.getSystemService(Context.WINDOW_SERVICE) as WindowManager
-        windowManager.defaultDisplay.getMetrics(displayMetrics)
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.R) {
+            val display = this.display
+            display?.getRealMetrics(displayMetrics)
+        } else {
+            @Suppress("DEPRECATION")
+            val display = this.windowManager.defaultDisplay
+            @Suppress("DEPRECATION")
+            display.getMetrics(displayMetrics)
+        }
         ImageFactory.displayMetrics = displayMetrics
     }
 
