@@ -12,7 +12,6 @@ class ImageFactory {
         var imageWidth : Int = 0
         var imageHeight : Int = 0
         var displayMetrics : DisplayMetrics? = null
-
         var resultImage : Bitmap? = null
 
         private fun getRes(){
