@@ -1,4 +1,6 @@
 <resources>
     <string name="app_name">Astolfo (gay) sounds 2</string>
     <string name="shopText">Shop</string>
+    <string name="clicks">Clicks</string>
+    <string name="coins">Coins</string>
 </resources>
