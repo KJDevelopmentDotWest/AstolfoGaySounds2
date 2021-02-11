@@ -3,4 +3,5 @@
     <string name="shopText">Shop</string>
     <string name="clicks">Clicks</string>
     <string name="coins">Coins</string>
+    <string name="achievements">Achievements</string>
 </resources>

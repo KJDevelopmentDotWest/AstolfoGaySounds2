@@ -58,7 +58,15 @@
             android:id="@+id/shopButton"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
+            android:layout_weight="1"
             android:text="@string/shopText" />
+
+        <Button
+            android:id="@+id/achievementsButton"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:text="@string/achievements" />
     </LinearLayout>
 
 </LinearLayout>

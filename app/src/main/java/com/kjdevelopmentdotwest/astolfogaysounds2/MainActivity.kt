@@ -21,6 +21,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var mainImage: ImageView
     private lateinit var shopButton: Button
+    private lateinit var achievementsButton: Button
     private lateinit var clickCountTextView: TextView
     private lateinit var moneyCountTextView: TextView
 
@@ -48,6 +49,7 @@ class MainActivity : AppCompatActivity() {
     private fun setUpViews(){
         mainImage = findViewById(R.id.mainImage)
         shopButton = findViewById(R.id.shopButton)
+        achievementsButton = findViewById(R.id.achievementsButton)
         clickCountTextView = findViewById(R.id.clickCountTextView)
         moneyCountTextView = findViewById(R.id.moneyCountTextView)
 
@@ -58,7 +60,11 @@ class MainActivity : AppCompatActivity() {
             moneyCountTextView.text = UserData.moneyCount.toString()
         }
 
-        shopButton.setOnClickListener{
+        shopButton.setOnClickListener {
+            startActivity(Intent(this, ShopActivity::class.java))
+        }
+
+        achievementsButton.setOnClickListener{
             ImageFactory.mergeScaleBitmaps(
                 BitmapFactory.decodeResource(
                     resources,
@@ -73,22 +79,28 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setUpImageFactory(){
-        val displayMetrics = DisplayMetrics()
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.R) {
-            val display = this.display
-            display?.getRealMetrics(displayMetrics)
-        } else {
-            @Suppress("DEPRECATION")
-            val display = this.windowManager.defaultDisplay
-            @Suppress("DEPRECATION")
-            display.getMetrics(displayMetrics)
+
+        if (ImageFactory.displayMetrics == null){
+            val displayMetrics = DisplayMetrics()
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.R) {
+                val display = this.display
+                display?.getRealMetrics(displayMetrics)
+            } else {
+                @Suppress("DEPRECATION")
+                val display = this.windowManager.defaultDisplay
+                @Suppress("DEPRECATION")
+                display.getMetrics(displayMetrics)
+            }
+            ImageFactory.displayMetrics = displayMetrics
         }
-        ImageFactory.displayMetrics = displayMetrics
+
     }
 
     private fun setUpUserData(){
-        UserData.context = this
-        UserData.retrieveUserInfoFromFile()
+        if (UserData.context == null){
+            UserData.context = this
+            UserData.retrieveUserInfoFromFile()
+        }
         clickCountTextView.text = UserData.clickCount.toString()
         moneyCountTextView.text = UserData.moneyCount.toString()
 

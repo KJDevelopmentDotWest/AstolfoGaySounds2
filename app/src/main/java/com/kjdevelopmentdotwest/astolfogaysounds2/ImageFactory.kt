@@ -20,7 +20,9 @@ class ImageFactory {
         }
 
         fun scaleBitmap(src : Bitmap){
-            getRes()
+            if (imageWidth <= 0 || imageHeight <= 0){
+                getRes()
+            }
 
             val result = Bitmap.createBitmap(imageWidth, imageHeight, Bitmap.Config.ARGB_8888)
             val canvas = Canvas(result)
@@ -31,7 +33,9 @@ class ImageFactory {
         }
 
         fun mergeScaleBitmaps(back : Bitmap, front : Bitmap, offsetLeft : Float, offsetTop : Float){
-            getRes()
+            if (imageWidth <= 0 || imageHeight <= 0){
+                getRes()
+            }
 
             val result = Bitmap.createBitmap(imageWidth, imageHeight, Bitmap.Config.ARGB_8888)
             val canvas = Canvas(result)
@@ -42,5 +46,4 @@ class ImageFactory {
             resultImage = result
         }
     }
-
 }
