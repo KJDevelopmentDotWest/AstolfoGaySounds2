@@ -1,5 +1,6 @@
 package com.kjdevelopmentdotwest.astolfogaysounds2
 
+import android.content.res.Resources
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.util.DisplayMetrics
@@ -13,6 +14,7 @@ class ImageFactory {
         var imageHeight : Int = 0
         var displayMetrics : DisplayMetrics? = null
         var resultImage : Bitmap? = null
+        var resources: Resources? = null
 
         private fun getRes(){
             imageWidth = displayMetrics!!.widthPixels

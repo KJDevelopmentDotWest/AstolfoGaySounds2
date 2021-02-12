@@ -10,6 +10,7 @@ class UserData {
         var clickCount : Long = 0
         var moneyCount : Long = 0
         var context: Context? = null
+        var cloth: Map<Int, Int> = mapOf() //<id, status[0 - not sold, 1 - sold, 2 - equipped]>
 
         //TAG ORDER: CLICK COUNT, MONEY COUNT, .....
         fun retrieveUserInfoFromFile(){

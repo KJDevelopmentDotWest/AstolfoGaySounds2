@@ -92,6 +92,7 @@ class MainActivity : AppCompatActivity() {
                 display.getMetrics(displayMetrics)
             }
             ImageFactory.displayMetrics = displayMetrics
+            ImageFactory.resources = resources
         }
 
     }
@@ -109,7 +110,7 @@ class MainActivity : AppCompatActivity() {
     private fun googleAccountCheck(){
         val account: GoogleSignInAccount? = GoogleSignIn.getLastSignedInAccount(this)
         if (account == null){
-            startActivity(Intent(this, SignInActivity::class.java))
+            //startActivity(Intent(this, SignInActivity::class.java))
         }
     }
 
