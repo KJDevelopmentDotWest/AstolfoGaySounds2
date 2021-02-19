@@ -18,7 +18,7 @@ class ImageFactory {
 
         private fun getRes(){
             imageWidth = displayMetrics!!.widthPixels
-            imageHeight = displayMetrics!!.heightPixels - (24 + 50 + 50) * displayMetrics!!.density.toInt() // 24dp status bar 50dp bottom buttons 50dp counter
+            imageHeight = displayMetrics!!.heightPixels - (24) * displayMetrics!!.density.toInt() // 24dp status bar
         }
 
         fun scaleBitmap(src : Bitmap){
@@ -43,7 +43,7 @@ class ImageFactory {
             val canvas = Canvas(result)
 
             canvas.drawBitmap(Bitmap.createScaledBitmap(back, imageWidth, imageHeight, true), 0f, 0f, null)
-            canvas.drawBitmap(Bitmap.createScaledBitmap(front, 300, 1000, true), offsetLeft, offsetTop, null)
+            canvas.drawBitmap(Bitmap.createScaledBitmap(front, 500, 500, true), offsetLeft, offsetTop, null)
 
             resultImage = result
         }

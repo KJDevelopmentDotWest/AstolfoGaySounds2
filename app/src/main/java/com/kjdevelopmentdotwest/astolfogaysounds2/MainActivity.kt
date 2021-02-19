@@ -1,13 +1,11 @@
 package com.kjdevelopmentdotwest.astolfogaysounds2
 
 import android.Manifest
-import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.util.DisplayMetrics
-import android.view.WindowManager
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
@@ -15,9 +13,20 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
+import com.kjdevelopmentdotwest.astolfogaysounds2.skins.CasualPostureSkirt
+import java.io.*
+import java.lang.RuntimeException
+import java.util.concurrent.ExecutorService
+import java.util.concurrent.Executors
 
 
-class MainActivity : AppCompatActivity() {
+open class MainActivity : AppCompatActivity() {
+
+    companion object{
+        var clickCount : Long = 0
+        var moneyCount : Long = 0
+        val casualPostureSkirts = arrayListOf<CasualPostureSkirt>()
+    }
 
     private lateinit var mainImage: ImageView
     private lateinit var shopButton: Button
@@ -54,10 +63,10 @@ class MainActivity : AppCompatActivity() {
         moneyCountTextView = findViewById(R.id.moneyCountTextView)
 
         mainImage.setOnClickListener {
-            UserData.clickCount++
-            clickCountTextView.text = UserData.clickCount.toString()
-            UserData.moneyCount++
-            moneyCountTextView.text = UserData.moneyCount.toString()
+            clickCount++
+            clickCountTextView.text = clickCount.toString()
+            moneyCount++
+            moneyCountTextView.text = moneyCount.toString()
         }
 
         shopButton.setOnClickListener {
@@ -98,13 +107,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setUpUserData(){
-        if (UserData.context == null){
-            UserData.context = this
-            UserData.retrieveUserInfoFromFile()
-        }
-        clickCountTextView.text = UserData.clickCount.toString()
-        moneyCountTextView.text = UserData.moneyCount.toString()
 
+        retrieveAll()
+        clickCountTextView.text = clickCount.toString()
+        moneyCountTextView.text = moneyCount.toString()
     }
 
     private fun googleAccountCheck(){
@@ -136,11 +142,57 @@ class MainActivity : AppCompatActivity() {
 
     override fun onPause() {
         super.onPause()
-        UserData.saveProgress()
+        saveAll()
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        UserData.saveProgress()
+        saveAll()
+    }
+
+    private fun saveAll(){
+        saveClickMoneyData()
+        saveCasualPostureData()
+    }
+
+    private fun retrieveAll(){
+        retrieveClickMoneyData()
+        retrieveCasualPostureData()
+    }
+
+    private fun saveClickMoneyData(){
+        val sharedPreferences = getSharedPreferences("clickMoneyData", MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.putLong("clicks", clickCount)
+        editor.putLong("money", moneyCount)
+        editor.apply()
+
+    }
+
+    private fun retrieveClickMoneyData(){
+        val sharedPreferences = getSharedPreferences("clickMoneyData", MODE_PRIVATE)
+        clickCount = sharedPreferences.getLong("clicks", 0)
+        moneyCount = sharedPreferences.getLong("money", 0)
+    }
+
+    private fun saveCasualPostureData(){
+        val sharedPreferences = getSharedPreferences("casualPostureData", MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.putInt("blackSkirt", casualPostureSkirts[0].status)
+        editor.putInt("greenSkirt", casualPostureSkirts[1].status)
+        editor.apply()
+
+    }
+
+    private fun retrieveCasualPostureData(){
+        val sharedPreferences = getSharedPreferences("casualPostureData", MODE_PRIVATE)
+        casualPostureSkirts.add(CasualPostureSkirt(BitmapFactory.decodeResource(resources, R.drawable.blackskirt), sharedPreferences.getInt("blackSkirt", 0)))
+        casualPostureSkirts.add(CasualPostureSkirt(BitmapFactory.decodeResource(resources, R.drawable.greenskirt), sharedPreferences.getInt("greenSkirt", 0)))
+        casualPostureSkirts.forEach {
+            if (it.status == 2){
+                it.draw()
+                return@forEach
+            }
+        }
     }
 }

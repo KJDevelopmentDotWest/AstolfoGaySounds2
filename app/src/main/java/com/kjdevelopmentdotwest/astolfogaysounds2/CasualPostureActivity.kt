@@ -1,10 +1,8 @@
 package com.kjdevelopmentdotwest.astolfogaysounds2
 
-import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
-import com.kjdevelopmentdotwest.astolfogaysounds2.skins.CasualPostureSkirt
 
 class CasualPostureActivity : AppCompatActivity() {
     lateinit var blackSkirtButton: Button
@@ -17,15 +15,25 @@ class CasualPostureActivity : AppCompatActivity() {
         blackSkirtButton = findViewById(R.id.blackSkirtButton)
         greenSkirtButton = findViewById(R.id.greenSkirtButton)
 
-        val skirts = arrayListOf<CasualPostureSkirt>()
-        skirts.add(CasualPostureSkirt(1, BitmapFactory.decodeResource(resources, R.drawable.blackskirt), 1))
-        skirts.add(CasualPostureSkirt(2, BitmapFactory.decodeResource(resources, R.drawable.greenskirt), 1))
-
         blackSkirtButton.setOnClickListener {
-            skirts[0].draw()
+            MainActivity.casualPostureSkirts[0].draw()
+            MainActivity.casualPostureSkirts.forEach{
+                if (it.status == 2){
+                    it.status = 1
+                    return@forEach
+                }
+            }
+            MainActivity.casualPostureSkirts[0].status = 2
         }
         greenSkirtButton.setOnClickListener {
-            skirts[1].draw()
+            MainActivity.casualPostureSkirts[1].draw()
+            MainActivity.casualPostureSkirts.forEach{
+                if (it.status == 2){
+                    it.status = 1
+                    return@forEach
+                }
+            }
+            MainActivity.casualPostureSkirts[1].status = 2
         }
     }
 }

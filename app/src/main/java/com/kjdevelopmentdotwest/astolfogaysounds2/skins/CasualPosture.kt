@@ -7,8 +7,8 @@ import com.kjdevelopmentdotwest.astolfogaysounds2.R
 
 open class CasualPosture {
     companion object{
-        const val SKIRT_OFFSET_TOP = 10f
-        const val SKIRT_OFFSET_LEFT = 10f
+        const val SKIRT_OFFSET_TOP = 100f
+        const val SKIRT_OFFSET_LEFT = 100f
         var baseBitmap: Bitmap = BitmapFactory.decodeResource(ImageFactory.resources, R.drawable.astolfo)
     }
 }
