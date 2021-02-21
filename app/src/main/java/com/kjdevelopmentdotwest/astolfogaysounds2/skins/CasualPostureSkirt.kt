@@ -10,7 +10,7 @@ class CasualPostureSkirt(var resBitmap: Bitmap, var status: Int): CasualPosture(
     private val offsetLeft = SKIRT_OFFSET_LEFT
 
     fun draw(){
-        ImageFactory.mergeScaleBitmaps(baseBitmap, resBitmap, offsetLeft, offsetTop)
+        ImageFactory.mergeScaleBitmaps(baseBitmap, resBitmap)
         baseBitmap = ImageFactory.resultImage!!
     }
 }

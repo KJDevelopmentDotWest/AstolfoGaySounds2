@@ -6,7 +6,6 @@ import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.util.DisplayMetrics
 import android.view.WindowManager
-import android.widget.Button
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -43,7 +42,7 @@ class SignInActivity : AppCompatActivity() {
             val windowManager = applicationContext.getSystemService(Context.WINDOW_SERVICE) as WindowManager
             windowManager.defaultDisplay.getMetrics(displayMetrics)
             ImageFactory.displayMetrics = displayMetrics
-            ImageFactory.scaleBitmap(BitmapFactory.decodeResource(resources, R.drawable.astolfo))
+            ImageFactory.scaleBitmap(BitmapFactory.decodeResource(resources, R.drawable.casual_astolfo))
             startImage.setImageBitmap(ImageFactory.resultImage)
         }
 

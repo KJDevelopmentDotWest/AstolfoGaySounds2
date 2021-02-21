@@ -15,12 +15,9 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.kjdevelopmentdotwest.astolfogaysounds2.skins.CasualPostureSkirt
 import java.io.*
-import java.lang.RuntimeException
-import java.util.concurrent.ExecutorService
-import java.util.concurrent.Executors
 
 
-open class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity() {
 
     companion object{
         var clickCount : Long = 0
@@ -77,11 +74,11 @@ open class MainActivity : AppCompatActivity() {
             ImageFactory.mergeScaleBitmaps(
                 BitmapFactory.decodeResource(
                     resources,
-                    R.drawable.astolfo
+                    R.drawable.casual_astolfo
                 ), BitmapFactory.decodeResource(
                     resources,
                     R.drawable.astolfoface
-                ), 100f, 50f
+                )
             )
             mainImage.setImageBitmap(ImageFactory.resultImage)
         }
@@ -125,7 +122,7 @@ open class MainActivity : AppCompatActivity() {
         if (ImageFactory.resultImage != null){
             mainImage.setImageBitmap(ImageFactory.resultImage)
         } else {
-            ImageFactory.scaleBitmap(BitmapFactory.decodeResource(resources, R.drawable.astolfo))
+            ImageFactory.scaleBitmap(BitmapFactory.decodeResource(resources, R.drawable.casual_astolfo))
             mainImage.setImageBitmap(ImageFactory.resultImage)
         }
     }
@@ -135,7 +132,7 @@ open class MainActivity : AppCompatActivity() {
         if (ImageFactory.resultImage != null){
             mainImage.setImageBitmap(ImageFactory.resultImage)
         } else {
-            ImageFactory.scaleBitmap(BitmapFactory.decodeResource(resources, R.drawable.astolfo))
+            ImageFactory.scaleBitmap(BitmapFactory.decodeResource(resources, R.drawable.casual_astolfo))
             mainImage.setImageBitmap(ImageFactory.resultImage)
         }
     }
@@ -186,8 +183,8 @@ open class MainActivity : AppCompatActivity() {
 
     private fun retrieveCasualPostureData(){
         val sharedPreferences = getSharedPreferences("casualPostureData", MODE_PRIVATE)
-        casualPostureSkirts.add(CasualPostureSkirt(BitmapFactory.decodeResource(resources, R.drawable.blackskirt), sharedPreferences.getInt("blackSkirt", 0)))
-        casualPostureSkirts.add(CasualPostureSkirt(BitmapFactory.decodeResource(resources, R.drawable.greenskirt), sharedPreferences.getInt("greenSkirt", 0)))
+        casualPostureSkirts.add(CasualPostureSkirt(BitmapFactory.decodeResource(resources, R.drawable.casual_skirt_black), sharedPreferences.getInt("blackSkirt", 0)))
+        casualPostureSkirts.add(CasualPostureSkirt(BitmapFactory.decodeResource(resources, R.drawable.casual_skirt_green), sharedPreferences.getInt("greenSkirt", 0)))
         casualPostureSkirts.forEach {
             if (it.status == 2){
                 it.draw()

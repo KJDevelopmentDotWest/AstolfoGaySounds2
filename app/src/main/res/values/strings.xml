@@ -4,4 +4,8 @@
     <string name="clicks">Clicks</string>
     <string name="coins">Coins</string>
     <string name="achievements">Achievements</string>
+    <string name="casual_posture">Casual Skin</string>
+    <string name="formal_posture">Formal Skin</string>
+    <string name="school_posture">School Skin</string>
+    <string name="default_posture">Default Skin</string>
 </resources>
