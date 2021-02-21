@@ -4,7 +4,6 @@ import android.content.res.Resources
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.util.DisplayMetrics
-import android.view.Display
 
 
 class ImageFactory {
@@ -41,6 +40,18 @@ class ImageFactory {
 
             canvas.drawBitmap(back, 0f, 0f, null)
             canvas.drawBitmap(front, 0f, 0f, null)
+
+            resultImage = result
+        }
+
+        fun mergeScaleBitmaps(background: Bitmap, posture: Bitmap, skirt: Bitmap){
+
+            val result = Bitmap.createBitmap(imageWidth, imageHeight, Bitmap.Config.ARGB_8888)
+            val canvas = Canvas(result)
+
+            canvas.drawBitmap(Bitmap.createScaledBitmap(background, imageWidth, imageHeight, true), 0f, 0f, null)
+            canvas.drawBitmap(Bitmap.createScaledBitmap(posture, imageWidth, imageHeight, true), 0f, 0f, null)
+            canvas.drawBitmap(Bitmap.createScaledBitmap(skirt, imageWidth, imageHeight, true), 0f, 0f, null)
 
             resultImage = result
         }

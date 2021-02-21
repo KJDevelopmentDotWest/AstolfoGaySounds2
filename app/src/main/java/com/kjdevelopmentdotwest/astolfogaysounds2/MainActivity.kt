@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity() {
         checkPermissions() //check for permissions
         setUpViews() //initialize views
         setUpImageFactory() //initialize necessary variables for ImageFactory class
-        setUpUserData() // initialize necessary variables for UserData class and retrieve user info from storage
+        setUpUserData() // retrieve user info from storage
         googleAccountCheck() //check is user signed in google account
     }
 
