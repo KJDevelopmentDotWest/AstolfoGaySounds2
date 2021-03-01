@@ -14,6 +14,7 @@ open class Posture {
 
     open fun draw(){
         ImageFactory.mergeScaleBitmaps(backgroundBitmap, postureBitmap, skirtBitmap)
+
     }
 }
 
