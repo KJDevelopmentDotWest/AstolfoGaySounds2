@@ -13,6 +13,7 @@ class ImageFactory {
         var imageHeight : Int = 0
         var displayMetrics : DisplayMetrics? = null
         var resultImage : Bitmap? = null
+        var resultBackground: Bitmap? = null
         var resources: Resources? = null
 
         private fun getRes(){
@@ -33,23 +34,12 @@ class ImageFactory {
             resultImage = Bitmap.createScaledBitmap(src, imageWidth, imageHeight, true)
         }
 
-        fun mergeScaleBitmaps(back: Bitmap, front: Bitmap){
-
-            val result = Bitmap.createBitmap(back.width, back.height, Bitmap.Config.ARGB_8888)
-            val canvas = Canvas(result)
-
-            canvas.drawBitmap(back, 0f, 0f, null)
-            canvas.drawBitmap(front, 0f, 0f, null)
-
-            resultImage = result
-        }
-
         fun mergeScaleBitmaps(background: Bitmap, posture: Bitmap, skirt: Bitmap){
 
             val result = Bitmap.createBitmap(imageWidth, imageHeight, Bitmap.Config.ARGB_8888)
             val canvas = Canvas(result)
 
-            canvas.drawBitmap(Bitmap.createScaledBitmap(background, imageWidth, imageHeight, true), 0f, 0f, null)
+            //canvas.drawBitmap(Bitmap.createScaledBitmap(background, imageWidth, imageHeight, true), 0f, 0f, null)
             canvas.drawBitmap(Bitmap.createScaledBitmap(posture, imageWidth, imageHeight, true), 0f, 0f, null)
             canvas.drawBitmap(Bitmap.createScaledBitmap(skirt, imageWidth, imageHeight, true), 0f, 0f, null)
 

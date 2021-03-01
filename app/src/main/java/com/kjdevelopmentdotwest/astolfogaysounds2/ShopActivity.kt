@@ -31,5 +31,8 @@ class ShopActivity : AppCompatActivity() {
         casualPosturePreview.setOnClickListener {
             startActivity(Intent(this, CasualPostureActivity::class.java))
         }
+        backgroundPreview.setOnClickListener {
+            startActivity(Intent(this, BackgroundActivity::class.java))
+        }
     }
 }

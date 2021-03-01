@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
+import com.kjdevelopmentdotwest.astolfogaysounds2.skins.Background
 import com.kjdevelopmentdotwest.astolfogaysounds2.skins.CasualPostureSkirt
 import java.io.*
 
@@ -23,9 +24,11 @@ class MainActivity : AppCompatActivity() {
         var clickCount : Long = 0
         var moneyCount : Long = 0
         val casualPostureSkirts = arrayListOf<CasualPostureSkirt>()
+        val backgrounds = arrayListOf<Background>()
     }
 
     private lateinit var mainImage: ImageView
+    private lateinit var mainImageBackground: ImageView
     private lateinit var shopButton: Button
     private lateinit var achievementsButton: Button
     private lateinit var clickCountTextView: TextView
@@ -54,12 +57,13 @@ class MainActivity : AppCompatActivity() {
 
     private fun setUpViews(){
         mainImage = findViewById(R.id.mainImage)
+        mainImageBackground = findViewById(R.id.mainImageBackground)
         shopButton = findViewById(R.id.shopButton)
         achievementsButton = findViewById(R.id.achievementsButton)
         clickCountTextView = findViewById(R.id.clickCountTextView)
         moneyCountTextView = findViewById(R.id.moneyCountTextView)
 
-        mainImage.setOnClickListener {
+        mainImageBackground.setOnClickListener {
             clickCount++
             clickCountTextView.text = clickCount.toString()
             moneyCount++
@@ -68,19 +72,6 @@ class MainActivity : AppCompatActivity() {
 
         shopButton.setOnClickListener {
             startActivity(Intent(this, ShopActivity::class.java))
-        }
-
-        achievementsButton.setOnClickListener{
-            ImageFactory.mergeScaleBitmaps(
-                BitmapFactory.decodeResource(
-                    resources,
-                    R.drawable.casual_astolfo
-                ), BitmapFactory.decodeResource(
-                    resources,
-                    R.drawable.astolfoface
-                )
-            )
-            mainImage.setImageBitmap(ImageFactory.resultImage)
         }
     }
 
@@ -104,7 +95,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setUpUserData(){
-
         retrieveAll()
         clickCountTextView.text = clickCount.toString()
         moneyCountTextView.text = moneyCount.toString()
@@ -119,22 +109,14 @@ class MainActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-        if (ImageFactory.resultImage != null){
-            mainImage.setImageBitmap(ImageFactory.resultImage)
-        } else {
-            ImageFactory.scaleBitmap(BitmapFactory.decodeResource(resources, R.drawable.casual_astolfo))
-            mainImage.setImageBitmap(ImageFactory.resultImage)
-        }
+        mainImage.setImageBitmap(ImageFactory.resultImage)
+        mainImageBackground.setImageBitmap(ImageFactory.resultBackground)
     }
 
     override fun onResume() {
         super.onResume()
-        if (ImageFactory.resultImage != null){
-            mainImage.setImageBitmap(ImageFactory.resultImage)
-        } else {
-            ImageFactory.scaleBitmap(BitmapFactory.decodeResource(resources, R.drawable.casual_astolfo))
-            mainImage.setImageBitmap(ImageFactory.resultImage)
-        }
+        mainImage.setImageBitmap(ImageFactory.resultImage)
+        mainImageBackground.setImageBitmap(ImageFactory.resultBackground)
     }
 
     override fun onPause() {
@@ -150,11 +132,13 @@ class MainActivity : AppCompatActivity() {
     private fun saveAll(){
         saveClickMoneyData()
         saveCasualPostureData()
+        saveBackgroundData()
     }
 
     private fun retrieveAll(){
         retrieveClickMoneyData()
         retrieveCasualPostureData()
+        retrieveBackgroundData()
     }
 
     private fun saveClickMoneyData(){
@@ -163,13 +147,32 @@ class MainActivity : AppCompatActivity() {
         editor.putLong("clicks", clickCount)
         editor.putLong("money", moneyCount)
         editor.apply()
-
     }
 
     private fun retrieveClickMoneyData(){
         val sharedPreferences = getSharedPreferences("clickMoneyData", MODE_PRIVATE)
         clickCount = sharedPreferences.getLong("clicks", 0)
         moneyCount = sharedPreferences.getLong("money", 0)
+    }
+
+    private fun saveBackgroundData(){
+        val sharedPreferences = getSharedPreferences("backgroundData", MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.putInt("blackBackground", backgrounds[0].status)
+        editor.putInt("greenBackground", backgrounds[1].status)
+        editor.apply()
+    }
+
+    private fun retrieveBackgroundData(){
+        val sharedPreferences = getSharedPreferences("backgroundData", MODE_PRIVATE)
+        backgrounds.add(Background(BitmapFactory.decodeResource(resources, R.drawable.background_black), sharedPreferences.getInt("blackBackground", 2)))
+        backgrounds.add(Background(BitmapFactory.decodeResource(resources, R.drawable.background_green), sharedPreferences.getInt("greenBackground", 0)))
+        backgrounds.forEach {
+            if (it.status == 2){
+                it.draw()
+                return@forEach
+            }
+        }
     }
 
     private fun saveCasualPostureData(){

@@ -8,6 +8,14 @@
     tools:context=".MainActivity">
 
     <ImageView
+        android:id="@+id/mainImageBackground"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        app:srcCompat="@drawable/background_black"
+        android:scaleType="fitXY"/>
+
+    <ImageView
         android:id="@+id/mainImage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
