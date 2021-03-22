@@ -34,12 +34,11 @@ class ImageFactory {
             resultImage = Bitmap.createScaledBitmap(src, imageWidth, imageHeight, true)
         }
 
-        fun mergeScaleBitmaps(background: Bitmap, posture: Bitmap, skirt: Bitmap){
+        fun mergeScaleBitmaps(posture: Bitmap, skirt: Bitmap){
 
             val result = Bitmap.createBitmap(imageWidth, imageHeight, Bitmap.Config.ARGB_8888)
             val canvas = Canvas(result)
 
-            //canvas.drawBitmap(Bitmap.createScaledBitmap(background, imageWidth, imageHeight, true), 0f, 0f, null)
             canvas.drawBitmap(Bitmap.createScaledBitmap(posture, imageWidth, imageHeight, true), 0f, 0f, null)
             canvas.drawBitmap(Bitmap.createScaledBitmap(skirt, imageWidth, imageHeight, true), 0f, 0f, null)
 

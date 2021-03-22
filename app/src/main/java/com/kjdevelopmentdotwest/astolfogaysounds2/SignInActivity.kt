@@ -38,12 +38,7 @@ class SignInActivity : AppCompatActivity() {
         if (account != null){
             startActivity(Intent(this, MainActivity::class.java))
         } else {
-            val displayMetrics = DisplayMetrics()
-            val windowManager = applicationContext.getSystemService(Context.WINDOW_SERVICE) as WindowManager
-            windowManager.defaultDisplay.getMetrics(displayMetrics)
-            ImageFactory.displayMetrics = displayMetrics
-            ImageFactory.scaleBitmap(BitmapFactory.decodeResource(resources, R.drawable.casual_astolfo))
-            startImage.setImageBitmap(ImageFactory.resultImage)
+            TODO()
         }
 
         signInButton.setOnClickListener{
