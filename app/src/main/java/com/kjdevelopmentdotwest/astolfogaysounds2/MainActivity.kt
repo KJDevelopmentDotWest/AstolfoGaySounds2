@@ -10,7 +10,6 @@ import android.util.DisplayMetrics
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -96,7 +95,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setUpUserData(){
-        val retrieveAndDrawThread = RetrieveUserDataAndDrawThread()
+        val retrieveAndDrawThread = RetrieveUserDataAndDrawImageThread()
         retrieveAndDrawThread.start()
     }
 
@@ -126,7 +125,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    inner class RetrieveUserDataAndDrawThread: Thread(){
+    inner class RetrieveUserDataAndDrawImageThread: Thread(){
         override fun run() {
             val sharedPreferences = getSharedPreferences("data", MODE_PRIVATE)
             retrieveClickMoneyData(sharedPreferences)
