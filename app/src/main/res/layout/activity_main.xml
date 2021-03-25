@@ -97,4 +97,12 @@
             android:textColor="@color/black" />
     </LinearLayout>
 
+    <ImageView
+        android:id="@+id/loadingGif"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        app:srcCompat="?attr/selectableItemBackground"
+        android:scaleType="fitXY"/>
+
 </RelativeLayout>

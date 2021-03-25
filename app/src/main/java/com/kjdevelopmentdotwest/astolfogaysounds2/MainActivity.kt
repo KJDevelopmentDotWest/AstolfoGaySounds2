@@ -12,11 +12,11 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import com.bumptech.glide.Glide
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.kjdevelopmentdotwest.astolfogaysounds2.skins.Background
 import com.kjdevelopmentdotwest.astolfogaysounds2.skins.CasualPostureSkirt
-import java.io.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -34,14 +34,15 @@ class MainActivity : AppCompatActivity() {
     private lateinit var achievementsButton: Button
     private lateinit var clickCountTextView: TextView
     private lateinit var moneyCountTextView: TextView
+    private lateinit var loadingGifImageView: ImageView
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        checkPermissions() //check for permissions
         setUpViews() //initialize views
+        checkPermissions() //check for permissions
         setUpImageFactory() //initialize necessary variables for ImageFactory class
         setUpUserData() // retrieve user info from storage and draw saved image
         googleAccountCheck() //check is user signed in google account
@@ -57,6 +58,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setUpViews(){
+        loadingGifImageView = findViewById(R.id.loadingGif)
+        loadingGifImageView.setImageResource(R.drawable.loading_gif)
+        //Glide.with(this).load(R.drawable.loading_gif).into(loadingGifImageView)
         mainImage = findViewById(R.id.mainImage)
         mainImageBackground = findViewById(R.id.mainImageBackground)
         shopButton = findViewById(R.id.shopButton)
@@ -115,13 +119,16 @@ class MainActivity : AppCompatActivity() {
     override fun onStop() {
         super.onStop()
         val saveThread = SaveUserDataThread()
+        saveThread.priority = Thread.MAX_PRIORITY
         saveThread.start()
     }
 
     inner class DrawImage: Thread(){
         override fun run() {
-            mainImage.setImageBitmap(ImageFactory.resultImage)
-            mainImageBackground.setImageBitmap(ImageFactory.resultBackground)
+            runOnUiThread {
+                mainImage.setImageBitmap(ImageFactory.resultImage)
+                mainImageBackground.setImageBitmap(ImageFactory.resultBackground)
+            }
         }
     }
 
@@ -136,6 +143,8 @@ class MainActivity : AppCompatActivity() {
                 moneyCountTextView.text = moneyCount.toString()
                 mainImage.setImageBitmap(ImageFactory.resultImage)
                 mainImageBackground.setImageBitmap(ImageFactory.resultBackground)
+                loadingGifImageView.setImageResource(android.R.color.transparent)
+                //Glide.with(this@MainActivity).load(android.R.color.transparent).into(loadingGifImageView)
             }
         }
 
