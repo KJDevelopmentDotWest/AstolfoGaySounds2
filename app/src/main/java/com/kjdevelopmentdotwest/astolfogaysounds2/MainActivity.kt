@@ -10,6 +10,7 @@ import android.util.DisplayMetrics
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import com.bumptech.glide.Glide
@@ -45,7 +46,7 @@ class MainActivity : AppCompatActivity() {
         checkPermissions() //check for permissions
         setUpImageFactory() //initialize necessary variables for ImageFactory class
         setUpUserData() // retrieve user info from storage and draw saved image
-        googleAccountCheck() //check is user signed in google account
+        googleAccountCheck()
     }
 
     private fun checkPermissions(){
@@ -106,7 +107,8 @@ class MainActivity : AppCompatActivity() {
     private fun googleAccountCheck(){
         val account: GoogleSignInAccount? = GoogleSignIn.getLastSignedInAccount(this)
         if (account == null){
-            //startActivity(Intent(this, SignInActivity::class.java))
+            startActivity(Intent(this, SignInActivity::class.java))
+            Toast.makeText(this, "something", Toast.LENGTH_LONG).show()
         }
     }
 
@@ -178,6 +180,9 @@ class MainActivity : AppCompatActivity() {
 
     inner class SaveUserDataThread: Thread(){
         override fun run(){
+            if (backgrounds.isEmpty()){
+                return
+            }
             val sharedPreferences = getSharedPreferences("data", MODE_PRIVATE)
             val editor = sharedPreferences.edit()
             saveClickMoneyData(editor)

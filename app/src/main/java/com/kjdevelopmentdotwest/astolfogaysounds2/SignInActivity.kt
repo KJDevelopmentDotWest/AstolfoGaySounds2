@@ -29,16 +29,12 @@ class SignInActivity : AppCompatActivity() {
         signInButton = findViewById(R.id.sign_in_button)
         signInButton.setSize(SignInButton.SIZE_WIDE)
         startImage = findViewById(R.id.startImage)
-        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestEmail()
-            .build()
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build()
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
         account = GoogleSignIn.getLastSignedInAccount(this)
 
         if (account != null){
             startActivity(Intent(this, MainActivity::class.java))
-        } else {
-            TODO()
         }
 
         signInButton.setOnClickListener{
