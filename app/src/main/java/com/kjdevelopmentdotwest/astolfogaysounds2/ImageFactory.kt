@@ -21,8 +21,8 @@ class ImageFactory {
             imageHeight = displayMetrics!!.heightPixels - (24) * displayMetrics!!.density.toInt() // 24dp status bar
         }
 
-        fun scaleBitmap(src: Bitmap){
-            if (imageWidth <= 0 || imageHeight <= 0){
+        fun scaleBitmap(src: Bitmap) {
+            if (imageWidth <= 0 || imageHeight <= 0) {
                 getRes()
             }
 
@@ -34,13 +34,29 @@ class ImageFactory {
             resultImage = Bitmap.createScaledBitmap(src, imageWidth, imageHeight, true)
         }
 
-        fun mergeScaleBitmaps(posture: Bitmap, skirt: Bitmap){
+        fun mergeScaleBitmaps(posture: Bitmap, skirt: Bitmap){ //deprecated?
 
             val result = Bitmap.createBitmap(imageWidth, imageHeight, Bitmap.Config.ARGB_8888)
             val canvas = Canvas(result)
 
             canvas.drawBitmap(Bitmap.createScaledBitmap(posture, imageWidth, imageHeight, true), 0f, 0f, null)
             canvas.drawBitmap(Bitmap.createScaledBitmap(skirt, imageWidth, imageHeight, true), 0f, 0f, null)
+
+            resultImage = result
+        }
+
+        fun mergeScaleBitmaps(resources: ArrayList<Item>){
+            val preResult = Bitmap.createBitmap(resources[0].res.width, resources[0].res.height, Bitmap.Config.ARGB_8888)
+            val tempCanvas = Canvas(preResult)
+
+            resources.forEach{
+                tempCanvas.drawBitmap(it.res, it.offsetLeft, it.offsetTop, null)
+            }
+
+            val result = Bitmap.createBitmap(imageWidth, imageHeight, Bitmap.Config.ARGB_8888)
+            val canvas = Canvas(result)
+
+            canvas.drawBitmap(Bitmap.createScaledBitmap(preResult, imageWidth, imageHeight, true), 0f, 0f, null)
 
             resultImage = result
         }

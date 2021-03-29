@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.util.DisplayMetrics
 import android.view.WindowManager
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
@@ -29,12 +30,13 @@ class SignInActivity : AppCompatActivity() {
         signInButton = findViewById(R.id.sign_in_button)
         signInButton.setSize(SignInButton.SIZE_WIDE)
         startImage = findViewById(R.id.startImage)
-        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build()
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).build()
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
         account = GoogleSignIn.getLastSignedInAccount(this)
 
         if (account != null){
-            startActivity(Intent(this, MainActivity::class.java))
+            Toast.makeText(this, "google account exists", Toast.LENGTH_SHORT).show()
+            //startActivity(Intent(this, MainActivity::class.java))
         }
 
         signInButton.setOnClickListener{
@@ -44,13 +46,14 @@ class SignInActivity : AppCompatActivity() {
 
     private fun signIn(){
         val signInIntent = mGoogleSignInClient.signInIntent
-        startActivityForResult(signInIntent, 0)
+        startActivityForResult(signInIntent, 1)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if (requestCode == 0){
+        account = GoogleSignIn.getLastSignedInAccount(this)
+        if (requestCode == 1 && account != null){
             startActivity(Intent(this, MainActivity::class.java))
         }
     }

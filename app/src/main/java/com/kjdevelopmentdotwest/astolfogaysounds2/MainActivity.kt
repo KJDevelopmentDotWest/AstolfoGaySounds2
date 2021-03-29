@@ -10,14 +10,11 @@ import android.util.DisplayMetrics
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
-import com.bumptech.glide.Glide
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
-import com.kjdevelopmentdotwest.astolfogaysounds2.skins.Background
-import com.kjdevelopmentdotwest.astolfogaysounds2.skins.CasualPostureSkirt
+import com.kjdevelopmentdotwest.astolfogaysounds2.skins.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -25,7 +22,12 @@ class MainActivity : AppCompatActivity() {
     companion object{
         var clickCount : Long = 0
         var moneyCount : Long = 0
+
         val casualPostureSkirts = arrayListOf<CasualPostureSkirt>()
+
+        val formalPostureBlazers = arrayListOf<FormalPostureBlazer>()
+        val formalPosturePants = arrayListOf<FormalPosturePants>()
+
         val backgrounds = arrayListOf<Background>()
     }
 
@@ -36,7 +38,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var clickCountTextView: TextView
     private lateinit var moneyCountTextView: TextView
     private lateinit var loadingGifImageView: ImageView
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,6 +56,9 @@ class MainActivity : AppCompatActivity() {
         }
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_MEDIA_LOCATION) == PackageManager.PERMISSION_DENIED){
             ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), 1)
+        }
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.INTERNET) == PackageManager.PERMISSION_DENIED){
+            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.INTERNET), 1)
         }
     }
 
@@ -108,7 +112,6 @@ class MainActivity : AppCompatActivity() {
         val account: GoogleSignInAccount? = GoogleSignIn.getLastSignedInAccount(this)
         if (account == null){
             startActivity(Intent(this, SignInActivity::class.java))
-            Toast.makeText(this, "something", Toast.LENGTH_LONG).show()
         }
     }
 
@@ -139,6 +142,7 @@ class MainActivity : AppCompatActivity() {
             val sharedPreferences = getSharedPreferences("data", MODE_PRIVATE)
             retrieveClickMoneyData(sharedPreferences)
             retrieveCasualPostureData(sharedPreferences)
+            retrieveFormalPostureData(sharedPreferences)
             retrieveBackgroundData(sharedPreferences)
             runOnUiThread {
                 clickCountTextView.text = clickCount.toString()
@@ -176,6 +180,26 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+
+        private fun retrieveFormalPostureData(sharedPreferences: SharedPreferences){
+            FormalPosture.status = sharedPreferences.getInt("formalPosture", 0)
+            formalPostureBlazers.add(FormalPostureBlazer(BitmapFactory.decodeResource(resources, R.drawable.formal_blazer_red), sharedPreferences.getInt("formalBlazerRed", 0)))
+            formalPostureBlazers.forEach {
+                if (it.status == 2){
+                    it.draw()
+                    return@forEach
+                }
+            }
+
+            formalPosturePants.add(FormalPosturePants(BitmapFactory.decodeResource(resources, R.drawable.formal_pants_black), sharedPreferences.getInt("formalPantsBlack", 0)))
+            formalPosturePants.add(FormalPosturePants(BitmapFactory.decodeResource(resources, R.drawable.formal_pants_green), sharedPreferences.getInt("formalPantsGreen", 0)))
+            formalPosturePants.forEach {
+                if (it.status == 2){
+                    it.draw()
+                    return@forEach
+                }
+            }
+        }
     }
 
     inner class SaveUserDataThread: Thread(){
@@ -187,6 +211,7 @@ class MainActivity : AppCompatActivity() {
             val editor = sharedPreferences.edit()
             saveClickMoneyData(editor)
             saveCasualPostureData(editor)
+            saveFormalPostureData(editor)
             saveBackgroundData(editor)
             editor.apply()
         }
@@ -204,6 +229,15 @@ class MainActivity : AppCompatActivity() {
         private fun saveCasualPostureData(editor: SharedPreferences.Editor){
             editor.putInt("blackSkirt", casualPostureSkirts[0].status)
             editor.putInt("greenSkirt", casualPostureSkirts[1].status)
+        }
+
+        private fun saveFormalPostureData(editor: SharedPreferences.Editor){
+            editor.putInt("formalBlazerRed", formalPostureBlazers[0].status)
+
+            editor.putInt("formalPantsBlack", formalPosturePants[0].status)
+            editor.putInt("formalPantsGreen", formalPosturePants[1].status)
+
+            editor.putInt("formalPosture", FormalPosture.status)
         }
     }
 }

@@ -4,23 +4,31 @@ import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import com.kjdevelopmentdotwest.astolfogaysounds2.skins.FormalPostureBlazer
 
-class CasualPostureActivity : AppCompatActivity() {
-    lateinit var blackSkirtButton: Button
-    lateinit var greenSkirtButton: Button
+class FormalPostureActivity : AppCompatActivity() {
+    private lateinit var redBlazerButton: Button
+    lateinit var blackPantsButton: Button
+    lateinit var greenPantsButton: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_casual_posture)
+        setContentView(R.layout.activity_formal_posture)
 
-        blackSkirtButton = findViewById(R.id.blackSkirtButton)
-        greenSkirtButton = findViewById(R.id.greenSkirtButton)
+        redBlazerButton = findViewById(R.id.formalRedBlazerButton)
+        blackPantsButton = findViewById(R.id.formalPantsBlackButton)
+        greenPantsButton = findViewById(R.id.formalPantsGreenButton)
 
-        blackSkirtButton.setOnClickListener {
-            onSkirtSelect(0)
+        redBlazerButton.setOnClickListener {
+            onBlazerSelect(0)
         }
-        greenSkirtButton.setOnClickListener {
-            onSkirtSelect(1)
+
+        blackPantsButton.setOnClickListener {
+            onPantsSelect(0)
+        }
+
+        greenPantsButton.setOnClickListener {
+            onPantsSelect(1)
         }
     }
 
@@ -31,27 +39,38 @@ class CasualPostureActivity : AppCompatActivity() {
         saveThread.start()
     }
 
-    private fun onSkirtSelect(place: Int){
-        MainActivity.casualPostureSkirts[place].draw()
-        MainActivity.casualPostureSkirts.forEach{
-            if (it.status == 2){
-                it.status = 1
-                return@forEach
-            }
-        }
+    private fun onBlazerSelect(place: Int){
+        MainActivity.formalPostureBlazers[place].draw()
         MainActivity.formalPostureBlazers.forEach{
             if (it.status == 2){
                 it.status = 1
                 return@forEach
             }
         }
-        MainActivity.formalPosturePants.forEach {
+        MainActivity.casualPostureSkirts.forEach {
             if (it.status == 2){
                 it.status = 1
                 return@forEach
             }
         }
-        MainActivity.casualPostureSkirts[place].status = 2
+        MainActivity.formalPostureBlazers[place].status = 2
+    }
+
+    private fun onPantsSelect(place: Int){
+        MainActivity.formalPosturePants[place].draw()
+        MainActivity.formalPosturePants.forEach{
+            if (it.status == 2){
+                it.status = 1
+                return@forEach
+            }
+        }
+        MainActivity.casualPostureSkirts.forEach {
+            if (it.status == 2){
+                it.status = 1
+                return@forEach
+            }
+        }
+        MainActivity.formalPosturePants[place].status = 2
     }
 
     inner class SaveUserDataThread: Thread(){
