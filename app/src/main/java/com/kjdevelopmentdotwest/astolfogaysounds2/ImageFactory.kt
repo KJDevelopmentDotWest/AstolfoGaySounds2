@@ -9,10 +9,10 @@ import android.util.DisplayMetrics
 class ImageFactory {
     companion object{
 
-        var imageWidth : Int = 0
-        var imageHeight : Int = 0
-        var displayMetrics : DisplayMetrics? = null
-        var resultImage : Bitmap? = null
+        var imageWidth: Int = 0
+        var imageHeight: Int = 0
+        var displayMetrics: DisplayMetrics? = null
+        var resultImage: Bitmap? = null
         var resultBackground: Bitmap? = null
         var resources: Resources? = null
 
@@ -34,6 +34,7 @@ class ImageFactory {
             resultImage = Bitmap.createScaledBitmap(src, imageWidth, imageHeight, true)
         }
 
+        @Deprecated("Should be replaced", ReplaceWith(" mergeScaleBitmaps(resources: ArrayList<Item>) "))
         fun mergeScaleBitmaps(posture: Bitmap, skirt: Bitmap){ //deprecated?
 
             val result = Bitmap.createBitmap(imageWidth, imageHeight, Bitmap.Config.ARGB_8888)
@@ -48,9 +49,10 @@ class ImageFactory {
         fun mergeScaleBitmaps(resources: ArrayList<Item>){
             val preResult = Bitmap.createBitmap(resources[0].res.width, resources[0].res.height, Bitmap.Config.ARGB_8888)
             val tempCanvas = Canvas(preResult)
+            val scale: Float = resources[0].res.width.toFloat().div(imageWidth.toFloat())
 
             resources.forEach{
-                tempCanvas.drawBitmap(it.res, it.offsetLeft, it.offsetTop, null)
+                tempCanvas.drawBitmap(it.res, resources[0].res.width.times(it.offsetLeft), resources[0].res.height.times(it.offsetTop), null)
             }
 
             val result = Bitmap.createBitmap(imageWidth, imageHeight, Bitmap.Config.ARGB_8888)

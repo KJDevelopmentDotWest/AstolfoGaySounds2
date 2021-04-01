@@ -12,10 +12,10 @@ open class FormalPosture {
     companion object{
         var status: Int = 0
 
-        const val BLAZER_OFFSET_LEFT = 572f*3f
-        const val BLAZER_OFFSET_TOP = 1091f*3f
-        const val PANTS_OFFSET_LEFT = 477f*3f
-        const val PANTS_OFFSET_TOP = 1745f*3f
+        const val BLAZER_OFFSET_LEFT = 0.529f
+        const val BLAZER_OFFSET_TOP = 0.568f
+        const val PANTS_OFFSET_LEFT = 0.442f
+        const val PANTS_OFFSET_TOP = 0.908f
         var baseBitmap: Bitmap = BitmapFactory.decodeResource(ImageFactory.resources, R.drawable.formal_astolfo)
         var previewBitmap: Bitmap = ImageFactory.generatePreview(BitmapFactory.decodeResource(ImageFactory.resources, R.drawable.formal_astolfo))
         var blazerBitmap: Bitmap = BitmapFactory.decodeResource(ImageFactory.resources, R.drawable.formal_blazer_red)
