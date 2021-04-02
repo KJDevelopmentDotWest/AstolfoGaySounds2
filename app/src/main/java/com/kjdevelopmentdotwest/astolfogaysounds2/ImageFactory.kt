@@ -49,7 +49,6 @@ class ImageFactory {
         fun mergeScaleBitmaps(resources: ArrayList<Item>){
             val preResult = Bitmap.createBitmap(resources[0].res.width, resources[0].res.height, Bitmap.Config.ARGB_8888)
             val tempCanvas = Canvas(preResult)
-            val scale: Float = resources[0].res.width.toFloat().div(imageWidth.toFloat())
 
             resources.forEach{
                 tempCanvas.drawBitmap(it.res, resources[0].res.width.times(it.offsetLeft), resources[0].res.height.times(it.offsetTop), null)
