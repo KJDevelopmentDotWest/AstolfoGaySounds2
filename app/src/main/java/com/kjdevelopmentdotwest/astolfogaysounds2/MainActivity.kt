@@ -116,7 +116,6 @@ class MainActivity : AppCompatActivity() {
         moneyCountTextView.text = moneyCount.toString()
 
         if (!mediaPlayer.isPlaying){
-
             mediaPlayer = when(System.nanoTime().rem(13).toInt()){
                 0 -> MediaPlayer.create(this, R.raw.gay_sound_1)
                 1 -> MediaPlayer.create(this, R.raw.gay_sound_2)
