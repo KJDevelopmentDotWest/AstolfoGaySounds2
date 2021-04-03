@@ -5,6 +5,7 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.graphics.BitmapFactory
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.util.DisplayMetrics
 import android.widget.Button
@@ -38,6 +39,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var clickCountTextView: TextView
     private lateinit var moneyCountTextView: TextView
     private lateinit var loadingGifImageView: ImageView
+    private lateinit var mediaPlayer: MediaPlayer
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -73,11 +75,10 @@ class MainActivity : AppCompatActivity() {
         clickCountTextView = findViewById(R.id.clickCountTextView)
         moneyCountTextView = findViewById(R.id.moneyCountTextView)
 
+        mediaPlayer = MediaPlayer.create(this, R.raw.gay_sound_1)
+
         mainImageBackground.setOnClickListener {
-            clickCount++
-            clickCountTextView.text = clickCount.toString()
-            moneyCount++
-            moneyCountTextView.text = moneyCount.toString()
+            onImageClicked()
         }
 
         shopButton.setOnClickListener {
@@ -108,6 +109,35 @@ class MainActivity : AppCompatActivity() {
         retrieveAndDrawThread.start()
     }
 
+    private fun onImageClicked(){
+        clickCount++
+        clickCountTextView.text = clickCount.toString()
+        moneyCount++
+        moneyCountTextView.text = moneyCount.toString()
+
+        if (!mediaPlayer.isPlaying){
+
+            mediaPlayer = when(System.nanoTime().rem(13).toInt()){
+                0 -> MediaPlayer.create(this, R.raw.gay_sound_1)
+                1 -> MediaPlayer.create(this, R.raw.gay_sound_2)
+                2 -> MediaPlayer.create(this, R.raw.gay_sound_3)
+                3 -> MediaPlayer.create(this, R.raw.gay_sound_4)
+                4 -> MediaPlayer.create(this, R.raw.gay_sound_5)
+                5 -> MediaPlayer.create(this, R.raw.gay_sound_6)
+                6 -> MediaPlayer.create(this, R.raw.gay_sound_7)
+                7 -> MediaPlayer.create(this, R.raw.gay_sound_8)
+                8 -> MediaPlayer.create(this, R.raw.gay_sound_9)
+                9 -> MediaPlayer.create(this, R.raw.gay_sound_10)
+                10 -> MediaPlayer.create(this, R.raw.gay_sound_11)
+                11 -> MediaPlayer.create(this, R.raw.gay_sound_12)
+                12 -> MediaPlayer.create(this, R.raw.gay_sound_13)
+                else -> MediaPlayer.create(this, R.raw.gay_sound_1)
+            }
+
+            mediaPlayer.start()
+        }
+    }
+
     private fun googleAccountCheck(){
         val account: GoogleSignInAccount? = GoogleSignIn.getLastSignedInAccount(this)
         if (account == null){
@@ -123,6 +153,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onStop() {
         super.onStop()
+        mediaPlayer.stop()
         val saveThread = SaveUserDataThread()
         saveThread.priority = Thread.MAX_PRIORITY
         saveThread.start()

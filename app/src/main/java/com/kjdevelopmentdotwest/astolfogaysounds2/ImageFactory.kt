@@ -35,7 +35,7 @@ class ImageFactory {
         }
 
         @Deprecated("Should be replaced", ReplaceWith(" mergeScaleBitmaps(resources: ArrayList<Item>) "))
-        fun mergeScaleBitmaps(posture: Bitmap, skirt: Bitmap){ //deprecated?
+        fun mergeScaleBitmaps(posture: Bitmap, skirt: Bitmap){
 
             val result = Bitmap.createBitmap(imageWidth, imageHeight, Bitmap.Config.ARGB_8888)
             val canvas = Canvas(result)
@@ -51,7 +51,9 @@ class ImageFactory {
             val tempCanvas = Canvas(preResult)
 
             resources.forEach{
-                tempCanvas.drawBitmap(it.res, resources[0].res.width.times(it.offsetLeft), resources[0].res.height.times(it.offsetTop), null)
+                val finalOffsetLeft = resources[0].res.width.times(it.offsetLeft)
+                val finalOffsetTop = resources[0].res.height.times(it.offsetTop)
+                tempCanvas.drawBitmap(it.res, finalOffsetLeft, finalOffsetTop, null)
             }
 
             val result = Bitmap.createBitmap(imageWidth, imageHeight, Bitmap.Config.ARGB_8888)
@@ -59,7 +61,7 @@ class ImageFactory {
 
             canvas.drawBitmap(Bitmap.createScaledBitmap(preResult, imageWidth, imageHeight, true), 0f, 0f, null)
 
-            resultImage = result
+            resultImage = preResult
         }
 
         fun generatePreview(src: Bitmap): Bitmap{
