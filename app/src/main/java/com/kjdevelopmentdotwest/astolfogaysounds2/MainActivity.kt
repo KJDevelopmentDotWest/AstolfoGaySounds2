@@ -3,6 +3,7 @@ package com.kjdevelopmentdotwest.astolfogaysounds2
 import android.Manifest
 import android.content.Intent
 import android.content.SharedPreferences
+import android.content.pm.ActivityInfo
 import android.content.pm.PackageManager
 import android.graphics.BitmapFactory
 import android.media.MediaPlayer
@@ -216,7 +217,7 @@ class MainActivity : AppCompatActivity() {
             formalPostureBlazers.add(FormalPostureBlazer(BitmapFactory.decodeResource(resources, R.drawable.formal_blazer_red), sharedPreferences.getInt("formalBlazerRed", 0)))
             formalPostureBlazers.forEach {
                 if (it.status == 2){
-                    it.draw()
+                    it.addToDrawQueue()
                     return@forEach
                 }
             }
@@ -225,10 +226,11 @@ class MainActivity : AppCompatActivity() {
             formalPosturePants.add(FormalPosturePants(BitmapFactory.decodeResource(resources, R.drawable.formal_pants_green), sharedPreferences.getInt("formalPantsGreen", 0)))
             formalPosturePants.forEach {
                 if (it.status == 2){
-                    it.draw()
+                    it.addToDrawQueue()
                     return@forEach
                 }
             }
+            FormalPosture.draw()
         }
     }
 

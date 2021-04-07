@@ -55,11 +55,10 @@ class ImageFactory {
                 val finalOffsetTop = resources[0].res.height.times(it.offsetTop)
                 tempCanvas.drawBitmap(it.res, finalOffsetLeft, finalOffsetTop, null)
             }
-
-            val result = Bitmap.createBitmap(imageWidth, imageHeight, Bitmap.Config.ARGB_8888)
-            val canvas = Canvas(result)
-
-            canvas.drawBitmap(Bitmap.createScaledBitmap(preResult, imageWidth, imageHeight, true), 0f, 0f, null)
+//            val result = Bitmap.createBitmap(imageWidth, imageHeight, Bitmap.Config.ARGB_8888)
+//            val canvas = Canvas(result)
+//
+//            canvas.drawBitmap(Bitmap.createScaledBitmap(preResult, imageWidth, imageHeight, true), 0f, 0f, null)
 
             resultImage = preResult
         }

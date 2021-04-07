@@ -1,15 +1,18 @@
 package com.kjdevelopmentdotwest.astolfogaysounds2
 
+import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import android.widget.ImageButton
+import com.kjdevelopmentdotwest.astolfogaysounds2.skins.FormalPosture
 import com.kjdevelopmentdotwest.astolfogaysounds2.skins.FormalPostureBlazer
 
 class FormalPostureActivity : AppCompatActivity() {
     private lateinit var redBlazerButton: Button
-    lateinit var blackPantsButton: Button
-    lateinit var greenPantsButton: Button
+    lateinit var blackPantsButton: ImageButton
+    lateinit var greenPantsButton: ImageButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,37 +43,55 @@ class FormalPostureActivity : AppCompatActivity() {
     }
 
     private fun onBlazerSelect(place: Int){
-        MainActivity.formalPostureBlazers[place].draw()
-        MainActivity.formalPostureBlazers.forEach{
-            if (it.status == 2){
-                it.status = 1
-                return@forEach
-            }
+
+        if (MainActivity.formalPostureBlazers[place].status.compareTo(0) == 0){
+            startActivity(Intent(this, ShopPopupActivity::class.java))
         }
-        MainActivity.casualPostureSkirts.forEach {
-            if (it.status == 2){
-                it.status = 1
-                return@forEach
+
+        if (MainActivity.formalPostureBlazers[place].status.compareTo(1) == 0) {
+            MainActivity.formalPostureBlazers[place].addToDrawQueue()
+            MainActivity.formalPostureBlazers.forEach{
+                if (it.status == 2){
+                    it.status = 1
+                    return@forEach
+                }
             }
+            MainActivity.casualPostureSkirts.forEach {
+                if (it.status == 2){
+                    it.status = 1
+                    return@forEach
+                }
+            }
+            MainActivity.formalPostureBlazers[place].status = 2
+            FormalPosture.draw()
         }
-        MainActivity.formalPostureBlazers[place].status = 2
+
     }
 
     private fun onPantsSelect(place: Int){
-        MainActivity.formalPosturePants[place].draw()
-        MainActivity.formalPosturePants.forEach{
-            if (it.status == 2){
-                it.status = 1
-                return@forEach
-            }
+
+        if (MainActivity.formalPosturePants[place].status.compareTo(0) == 0){
+            startActivity(Intent(this, ShopPopupActivity::class.java))
+            MainActivity.formalPosturePants[place].status = 1
         }
-        MainActivity.casualPostureSkirts.forEach {
-            if (it.status == 2){
-                it.status = 1
-                return@forEach
+
+        if (MainActivity.formalPosturePants[place].status.compareTo(1) == 0){
+            MainActivity.formalPosturePants[place].addToDrawQueue()
+            MainActivity.formalPosturePants.forEach{
+                if (it.status == 2){
+                    it.status = 1
+                    return@forEach
+                }
             }
+            MainActivity.casualPostureSkirts.forEach {
+                if (it.status == 2){
+                    it.status = 1
+                    return@forEach
+                }
+            }
+            MainActivity.formalPosturePants[place].status = 2
+            FormalPosture.draw()
         }
-        MainActivity.formalPosturePants[place].status = 2
     }
 
     inner class SaveUserDataThread: Thread(){

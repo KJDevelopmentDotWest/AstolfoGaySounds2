@@ -20,12 +20,12 @@ open class FormalPosture {
         var previewBitmap: Bitmap = ImageFactory.generatePreview(BitmapFactory.decodeResource(ImageFactory.resources, R.drawable.formal_astolfo))
         var blazerBitmap: Bitmap = BitmapFactory.decodeResource(ImageFactory.resources, R.drawable.formal_blazer_red)
         var pantsBitmap: Bitmap = BitmapFactory.decodeResource(ImageFactory.resources, R.drawable.formal_pants_black)
-        var resultMap: ArrayList<Item> = arrayListOf(Item(baseBitmap, 0f, 0f),
+        var bitmapsToDraw: ArrayList<Item> = arrayListOf(Item(baseBitmap, 0f, 0f),
             Item(blazerBitmap, BLAZER_OFFSET_LEFT, BLAZER_OFFSET_TOP),
             Item(pantsBitmap, PANTS_OFFSET_LEFT, PANTS_OFFSET_TOP))
-    }
 
-    open fun draw() {
-        ImageFactory.mergeScaleBitmaps(resultMap)
+        fun draw() {
+            ImageFactory.mergeScaleBitmaps(bitmapsToDraw)
+        }
     }
 }
