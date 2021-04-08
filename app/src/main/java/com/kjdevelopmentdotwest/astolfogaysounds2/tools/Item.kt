@@ -1,4 +1,4 @@
-package com.kjdevelopmentdotwest.astolfogaysounds2
+package com.kjdevelopmentdotwest.astolfogaysounds2.tools
 
 import android.graphics.Bitmap
 

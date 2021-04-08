@@ -1,10 +1,10 @@
-package com.kjdevelopmentdotwest.astolfogaysounds2
+package com.kjdevelopmentdotwest.astolfogaysounds2.activities
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.renderscript.RenderScript
 import android.widget.ImageView
+import com.kjdevelopmentdotwest.astolfogaysounds2.R
 import com.kjdevelopmentdotwest.astolfogaysounds2.skins.*
 
 class ShopActivity : AppCompatActivity() {

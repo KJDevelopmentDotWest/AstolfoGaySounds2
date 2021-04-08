@@ -16,21 +16,24 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AstolfoGaySounds2">
-        <activity android:name=".ShopPopupActivity"></activity>
         <activity
-            android:name=".FormalPostureActivity"
+            android:name=".activities.ShopPopupActivity"
+            android:theme="@style/AppTheme.Popup">
+        </activity>
+        <activity
+            android:name=".activities.FormalPostureActivity"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".BackgroundActivity"
+            android:name=".activities.BackgroundActivity"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".CasualPostureActivity"
+            android:name=".activities.CasualPostureActivity"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ShopActivity"
+            android:name=".activities.ShopActivity"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -40,7 +43,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".SignInActivity"
+            android:name=".activities.SignInActivity"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -50,7 +53,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".activities.MainActivity"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait">
             <intent-filter>

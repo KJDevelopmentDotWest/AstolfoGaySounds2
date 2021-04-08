@@ -1,4 +1,4 @@
-package com.kjdevelopmentdotwest.astolfogaysounds2
+package com.kjdevelopmentdotwest.astolfogaysounds2.tools
 
 import android.content.res.Resources
 import android.graphics.Bitmap
@@ -68,10 +68,10 @@ class ImageFactory {
                 getRes()
             }
 
-            val result = Bitmap.createBitmap((imageWidth/2.1).toInt(), (imageHeight/2.1).toInt(), Bitmap.Config.ARGB_8888)
+            val result = Bitmap.createBitmap((imageWidth /2.1).toInt(), (imageHeight /2.1).toInt(), Bitmap.Config.ARGB_8888)
             val canvas = Canvas(result)
 
-            canvas.drawBitmap(Bitmap.createScaledBitmap(src, (imageWidth/2.1).toInt(), (imageHeight/2.1).toInt(), true), 0f, 0f, null)
+            canvas.drawBitmap(Bitmap.createScaledBitmap(src, (imageWidth /2.1).toInt(), (imageHeight /2.1).toInt(), true), 0f, 0f, null)
 
             return result
         }

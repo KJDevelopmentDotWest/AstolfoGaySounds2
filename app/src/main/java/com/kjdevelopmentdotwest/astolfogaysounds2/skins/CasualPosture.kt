@@ -2,7 +2,7 @@ package com.kjdevelopmentdotwest.astolfogaysounds2.skins
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import com.kjdevelopmentdotwest.astolfogaysounds2.ImageFactory
+import com.kjdevelopmentdotwest.astolfogaysounds2.tools.ImageFactory
 import com.kjdevelopmentdotwest.astolfogaysounds2.R
 
 open class CasualPosture{

@@ -1,9 +1,8 @@
-package com.kjdevelopmentdotwest.astolfogaysounds2
+package com.kjdevelopmentdotwest.astolfogaysounds2.activities
 
 import android.Manifest
 import android.content.Intent
 import android.content.SharedPreferences
-import android.content.pm.ActivityInfo
 import android.content.pm.PackageManager
 import android.graphics.BitmapFactory
 import android.media.MediaPlayer
@@ -16,22 +15,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
+import com.kjdevelopmentdotwest.astolfogaysounds2.tools.ImageFactory
+import com.kjdevelopmentdotwest.astolfogaysounds2.R
 import com.kjdevelopmentdotwest.astolfogaysounds2.skins.*
-
+import com.kjdevelopmentdotwest.astolfogaysounds2.tools.UserData
 
 class MainActivity : AppCompatActivity() {
-
-    companion object{
-        var clickCount : Long = 0
-        var moneyCount : Long = 0
-
-        val casualPostureSkirts = arrayListOf<CasualPostureSkirt>()
-
-        val formalPostureBlazers = arrayListOf<FormalPostureBlazer>()
-        val formalPosturePants = arrayListOf<FormalPosturePants>()
-
-        val backgrounds = arrayListOf<Background>()
-    }
 
     private lateinit var mainImage: ImageView
     private lateinit var mainImageBackground: ImageView
@@ -111,10 +100,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun onImageClicked(){
-        clickCount++
-        clickCountTextView.text = clickCount.toString()
-        moneyCount++
-        moneyCountTextView.text = moneyCount.toString()
+        UserData.clickCount++
+        clickCountTextView.text = UserData.clickCount.toString()
+        UserData.moneyCount++
+        moneyCountTextView.text = UserData.moneyCount.toString()
 
         if (!mediaPlayer.isPlaying){
             mediaPlayer = when(System.nanoTime().rem(13).toInt()){
@@ -170,106 +159,24 @@ class MainActivity : AppCompatActivity() {
 
     inner class RetrieveUserDataAndDrawImageThread: Thread(){
         override fun run() {
-            val sharedPreferences = getSharedPreferences("data", MODE_PRIVATE)
-            retrieveClickMoneyData(sharedPreferences)
-            retrieveCasualPostureData(sharedPreferences)
-            retrieveFormalPostureData(sharedPreferences)
-            retrieveBackgroundData(sharedPreferences)
+            UserData.sharedPreferences = getSharedPreferences("data", MODE_PRIVATE)
+            UserData.retrieveUserData()
             runOnUiThread {
-                clickCountTextView.text = clickCount.toString()
-                moneyCountTextView.text = moneyCount.toString()
+                clickCountTextView.text = UserData.clickCount.toString()
+                moneyCountTextView.text = UserData.moneyCount.toString()
                 mainImage.setImageBitmap(ImageFactory.resultImage)
                 mainImageBackground.setImageBitmap(ImageFactory.resultBackground)
                 loadingGifImageView.setImageResource(android.R.color.transparent)
-                //Glide.with(this@MainActivity).load(android.R.color.transparent).into(loadingGifImageView)
             }
-        }
-
-        private fun retrieveClickMoneyData(sharedPreferences: SharedPreferences){
-            clickCount = sharedPreferences.getLong("clicks", 0)
-            moneyCount = sharedPreferences.getLong("money", 0)
-        }
-
-        private fun retrieveBackgroundData(sharedPreferences: SharedPreferences){
-            backgrounds.add(Background(BitmapFactory.decodeResource(resources, R.drawable.background_black), sharedPreferences.getInt("blackBackground", 2)))
-            backgrounds.add(Background(BitmapFactory.decodeResource(resources, R.drawable.background_green), sharedPreferences.getInt("greenBackground", 0)))
-            backgrounds.forEach {
-                if (it.status == 2){
-                    it.draw()
-                    return@forEach
-                }
-            }
-        }
-
-        private fun retrieveCasualPostureData(sharedPreferences: SharedPreferences){
-            casualPostureSkirts.add(CasualPostureSkirt(BitmapFactory.decodeResource(resources, R.drawable.casual_skirt_black), sharedPreferences.getInt("blackSkirt", 2)))
-            casualPostureSkirts.add(CasualPostureSkirt(BitmapFactory.decodeResource(resources, R.drawable.casual_skirt_green), sharedPreferences.getInt("greenSkirt", 0)))
-            casualPostureSkirts.forEach {
-                if (it.status == 2){
-                    it.draw()
-                    return@forEach
-                }
-            }
-        }
-
-        private fun retrieveFormalPostureData(sharedPreferences: SharedPreferences){
-            FormalPosture.status = sharedPreferences.getInt("formalPosture", 0)
-            formalPostureBlazers.add(FormalPostureBlazer(BitmapFactory.decodeResource(resources, R.drawable.formal_blazer_red), sharedPreferences.getInt("formalBlazerRed", 0)))
-            formalPostureBlazers.forEach {
-                if (it.status == 2){
-                    it.addToDrawQueue()
-                    return@forEach
-                }
-            }
-
-            formalPosturePants.add(FormalPosturePants(BitmapFactory.decodeResource(resources, R.drawable.formal_pants_black), sharedPreferences.getInt("formalPantsBlack", 0)))
-            formalPosturePants.add(FormalPosturePants(BitmapFactory.decodeResource(resources, R.drawable.formal_pants_green), sharedPreferences.getInt("formalPantsGreen", 0)))
-            formalPosturePants.forEach {
-                if (it.status == 2){
-                    it.addToDrawQueue()
-                    return@forEach
-                }
-            }
-            FormalPosture.draw()
         }
     }
 
     inner class SaveUserDataThread: Thread(){
-        override fun run(){
-            if (backgrounds.isEmpty()){
+        override fun run() {
+            if (UserData.backgrounds.isEmpty()){
                 return
             }
-            val sharedPreferences = getSharedPreferences("data", MODE_PRIVATE)
-            val editor = sharedPreferences.edit()
-            saveClickMoneyData(editor)
-            saveCasualPostureData(editor)
-            saveFormalPostureData(editor)
-            saveBackgroundData(editor)
-            editor.apply()
-        }
-
-        private fun saveClickMoneyData(editor: SharedPreferences.Editor){
-            editor.putLong("clicks", clickCount)
-            editor.putLong("money", moneyCount)
-        }
-
-        private fun saveBackgroundData(editor: SharedPreferences.Editor){
-            editor.putInt("blackBackground", backgrounds[0].status)
-            editor.putInt("greenBackground", backgrounds[1].status)
-        }
-
-        private fun saveCasualPostureData(editor: SharedPreferences.Editor){
-            editor.putInt("blackSkirt", casualPostureSkirts[0].status)
-            editor.putInt("greenSkirt", casualPostureSkirts[1].status)
-        }
-
-        private fun saveFormalPostureData(editor: SharedPreferences.Editor){
-            editor.putInt("formalBlazerRed", formalPostureBlazers[0].status)
-
-            editor.putInt("formalPantsBlack", formalPosturePants[0].status)
-            editor.putInt("formalPantsGreen", formalPosturePants[1].status)
-
-            editor.putInt("formalPosture", FormalPosture.status)
+            UserData.saveUserData()
         }
     }
 }

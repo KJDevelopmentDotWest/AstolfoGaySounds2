@@ -1,11 +1,7 @@
-package com.kjdevelopmentdotwest.astolfogaysounds2
+package com.kjdevelopmentdotwest.astolfogaysounds2.activities
 
-import android.content.Context
 import android.content.Intent
-import android.graphics.BitmapFactory
 import android.os.Bundle
-import android.util.DisplayMetrics
-import android.view.WindowManager
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -14,6 +10,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.SignInButton
+import com.kjdevelopmentdotwest.astolfogaysounds2.R
 
 
 class SignInActivity : AppCompatActivity() {
@@ -35,7 +32,6 @@ class SignInActivity : AppCompatActivity() {
         account = GoogleSignIn.getLastSignedInAccount(this)
 
         if (account != null){
-            Toast.makeText(this, "google account exists", Toast.LENGTH_SHORT).show()
             //startActivity(Intent(this, MainActivity::class.java))
         }
 

@@ -1,9 +1,11 @@
-package com.kjdevelopmentdotwest.astolfogaysounds2
+package com.kjdevelopmentdotwest.astolfogaysounds2.activities
 
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import com.kjdevelopmentdotwest.astolfogaysounds2.R
+import com.kjdevelopmentdotwest.astolfogaysounds2.tools.UserData
 
 class CasualPostureActivity : AppCompatActivity() {
     lateinit var blackSkirtButton: Button
@@ -32,26 +34,26 @@ class CasualPostureActivity : AppCompatActivity() {
     }
 
     private fun onSkirtSelect(place: Int){
-        MainActivity.casualPostureSkirts[place].draw()
-        MainActivity.casualPostureSkirts.forEach{
+        UserData.casualPostureSkirts[place].draw()
+        UserData.casualPostureSkirts.forEach{
             if (it.status == 2){
                 it.status = 1
                 return@forEach
             }
         }
-        MainActivity.formalPostureBlazers.forEach{
+        UserData.formalPostureBlazers.forEach{
             if (it.status == 2){
                 it.status = 1
                 return@forEach
             }
         }
-        MainActivity.formalPosturePants.forEach {
+        UserData.formalPosturePants.forEach {
             if (it.status == 2){
                 it.status = 1
                 return@forEach
             }
         }
-        MainActivity.casualPostureSkirts[place].status = 2
+        UserData.casualPostureSkirts[place].status = 2
     }
 
     inner class SaveUserDataThread: Thread(){
@@ -65,18 +67,18 @@ class CasualPostureActivity : AppCompatActivity() {
         }
 
         private fun saveClickMoneyData(editor: SharedPreferences.Editor){
-            editor.putLong("clicks", MainActivity.clickCount)
-            editor.putLong("money", MainActivity.moneyCount)
+            editor.putLong("clicks", UserData.clickCount)
+            editor.putLong("money", UserData.moneyCount)
         }
 
         private fun saveBackgroundData(editor: SharedPreferences.Editor){
-            editor.putInt("blackBackground", MainActivity.backgrounds[0].status)
-            editor.putInt("greenBackground", MainActivity.backgrounds[1].status)
+            editor.putInt("blackBackground", UserData.backgrounds[0].status)
+            editor.putInt("greenBackground", UserData.backgrounds[1].status)
         }
 
         private fun saveCasualPostureData(editor: SharedPreferences.Editor){
-            editor.putInt("blackSkirt", MainActivity.casualPostureSkirts[0].status)
-            editor.putInt("greenSkirt", MainActivity.casualPostureSkirts[1].status)
+            editor.putInt("blackSkirt", UserData.casualPostureSkirts[0].status)
+            editor.putInt("greenSkirt", UserData.casualPostureSkirts[1].status)
         }
     }
 }

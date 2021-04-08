@@ -1,8 +1,10 @@
-package com.kjdevelopmentdotwest.astolfogaysounds2
+package com.kjdevelopmentdotwest.astolfogaysounds2.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import com.kjdevelopmentdotwest.astolfogaysounds2.R
+import com.kjdevelopmentdotwest.astolfogaysounds2.tools.UserData
 
 class BackgroundActivity : AppCompatActivity() {
     lateinit var blackBackgroundButton: Button
@@ -16,25 +18,25 @@ class BackgroundActivity : AppCompatActivity() {
         greenBackgroundButton = findViewById(R.id.background_green)
 
         blackBackgroundButton.setOnClickListener {
-            MainActivity.backgrounds[0].draw()
-            MainActivity.backgrounds.forEach{
+            UserData.backgrounds[0].draw()
+            UserData.backgrounds.forEach{
                 if (it.status == 2){
                     it.status = 1
                     return@forEach
                 }
             }
-            MainActivity.backgrounds[0].status = 2
+            UserData.backgrounds[0].status = 2
         }
 
         greenBackgroundButton.setOnClickListener {
-            MainActivity.backgrounds[1].draw()
-            MainActivity.backgrounds.forEach{
+            UserData.backgrounds[1].draw()
+            UserData.backgrounds.forEach{
                 if (it.status == 2){
                     it.status = 1
                     return@forEach
                 }
             }
-            MainActivity.backgrounds[1].status = 2
+            UserData.backgrounds[1].status = 2
         }
     }
 }

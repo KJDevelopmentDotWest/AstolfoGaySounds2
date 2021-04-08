@@ -1,7 +1,7 @@
 package com.kjdevelopmentdotwest.astolfogaysounds2.skins
 
 import android.graphics.Bitmap
-import com.kjdevelopmentdotwest.astolfogaysounds2.Item
+import com.kjdevelopmentdotwest.astolfogaysounds2.tools.Item
 
 //status 0 - not sold, 1 - sold, 2 - equipped
 
