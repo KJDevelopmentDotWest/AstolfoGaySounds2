@@ -130,13 +130,15 @@ class MainActivity : AppCompatActivity() {
     private fun googleAccountCheck(){
         val account: GoogleSignInAccount? = GoogleSignIn.getLastSignedInAccount(this)
         if (account == null){
-            //startActivity(Intent(this, SignInActivity::class.java))
+            startActivity(Intent(this, SignInActivity::class.java))
         }
     }
 
     override fun onResume() {
         super.onResume()
         val drawThread = DrawImage()
+        clickCountTextView.text = UserData.clickCount.toString()
+        moneyCountTextView.text = UserData.moneyCount.toString()
         drawThread.start()
     }
 

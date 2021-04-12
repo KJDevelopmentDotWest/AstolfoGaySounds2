@@ -21,6 +21,7 @@ class ImageFactory {
             imageHeight = displayMetrics!!.heightPixels - (24) * displayMetrics!!.density.toInt() // 24dp status bar
         }
 
+        @Deprecated("")
         fun scaleBitmap(src: Bitmap) {
             if (imageWidth <= 0 || imageHeight <= 0) {
                 getRes()

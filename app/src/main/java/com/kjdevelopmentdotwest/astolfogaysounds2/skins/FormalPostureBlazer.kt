@@ -7,11 +7,6 @@ import com.kjdevelopmentdotwest.astolfogaysounds2.tools.Item
 
 class FormalPostureBlazer(var resBitmap: Bitmap, var status: Int): FormalPosture() {
 
-//    override fun draw() {
-//        bitmapsToDraw[1] = Item(resBitmap, BLAZER_OFFSET_LEFT, BLAZER_OFFSET_TOP)
-//        super.draw()
-//    }
-
     fun addToDrawQueue(){
         bitmapsToDraw[1] = Item(resBitmap, BLAZER_OFFSET_LEFT, BLAZER_OFFSET_TOP)
     }

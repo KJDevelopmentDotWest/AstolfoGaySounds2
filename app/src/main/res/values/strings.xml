@@ -9,4 +9,8 @@
     <string name="school_posture">School Skin</string>
     <string name="default_posture">Default Skin</string>
     <string name="backgrounds">Backgrounds</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="are_you_sure_want_by_this_item">are you sure want buy this item</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
 </resources>
