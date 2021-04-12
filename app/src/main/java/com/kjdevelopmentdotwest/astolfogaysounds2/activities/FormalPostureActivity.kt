@@ -5,20 +5,16 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageButton
-import android.widget.Toast
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.commit
 import com.kjdevelopmentdotwest.astolfogaysounds2.R
 import com.kjdevelopmentdotwest.astolfogaysounds2.skins.FormalPosture
-import com.kjdevelopmentdotwest.astolfogaysounds2.skins.FormalPostureBlazer
-import com.kjdevelopmentdotwest.astolfogaysounds2.skins.FormalPosturePants
+import com.kjdevelopmentdotwest.astolfogaysounds2.skins.ClothItem
 import com.kjdevelopmentdotwest.astolfogaysounds2.tools.UserData
 
 class FormalPostureActivity : AppCompatActivity() {
     private lateinit var redBlazerButton: Button
     lateinit var blackPantsButton: ImageButton
     lateinit var greenPantsButton: ImageButton
-    private var latestItem: Any? = null
+    private var latestItem: ClothItem? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -102,8 +98,7 @@ class FormalPostureActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == 1 && resultCode == 1) {
-            if (latestItem is FormalPostureBlazer) (latestItem as FormalPostureBlazer).status = 1
-            if (latestItem is FormalPosturePants) (latestItem as FormalPosturePants).status = 1
+            latestItem?.status = 1
         }
     }
 }

@@ -5,9 +5,10 @@ import com.kjdevelopmentdotwest.astolfogaysounds2.tools.Item
 
 //status 0 - not sold, 1 - sold, 2 - equipped
 
-class FormalPostureBlazer(var resBitmap: Bitmap, var status: Int): FormalPosture() {
+class FormalPostureBlazer(override var resBitmap: Bitmap, override var status: Int): FormalPosture(), ClothItem {
 
-    fun addToDrawQueue(){
+    override fun addToDrawQueue(){
+        super.addToDrawQueue()
         bitmapsToDraw[1] = Item(resBitmap, BLAZER_OFFSET_LEFT, BLAZER_OFFSET_TOP)
     }
 }

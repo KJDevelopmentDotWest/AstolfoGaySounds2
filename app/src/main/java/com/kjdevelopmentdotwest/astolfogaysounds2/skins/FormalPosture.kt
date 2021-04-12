@@ -20,12 +20,26 @@ open class FormalPosture {
         var previewBitmap: Bitmap = ImageFactory.generatePreview(BitmapFactory.decodeResource(ImageFactory.resources, R.drawable.formal_astolfo))
         var blazerBitmap: Bitmap = BitmapFactory.decodeResource(ImageFactory.resources, R.drawable.formal_blazer_red)
         var pantsBitmap: Bitmap = BitmapFactory.decodeResource(ImageFactory.resources, R.drawable.formal_pants_black)
-        var bitmapsToDraw: ArrayList<Item> = arrayListOf(Item(baseBitmap, 0f, 0f),
+        var bitmapsToDraw: ArrayList<Item> = arrayListOf(
+            Item(baseBitmap, 0f, 0f),
             Item(blazerBitmap, BLAZER_OFFSET_LEFT, BLAZER_OFFSET_TOP),
             Item(pantsBitmap, PANTS_OFFSET_LEFT, PANTS_OFFSET_TOP))
 
         fun draw() {
             ImageFactory.mergeScaleBitmaps(bitmapsToDraw)
         }
+    }
+
+    open fun  addToDrawQueue(){
+        if (CasualPosture.status.compareTo(2) == 0){
+            CasualPosture.status = 1
+        }
+        if (DefaultPosture.status.compareTo(2) == 0){
+            DefaultPosture.status = 1
+        }
+        if (SchoolPosture.status.compareTo(2) == 0){
+            SchoolPosture.status = 1
+        }
+        status = 2
     }
 }
