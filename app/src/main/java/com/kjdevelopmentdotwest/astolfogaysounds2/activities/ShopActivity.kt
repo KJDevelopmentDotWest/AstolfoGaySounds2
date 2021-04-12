@@ -29,13 +29,60 @@ class ShopActivity : AppCompatActivity() {
         drawImagesThread.start()
 
         casualPosturePreview.setOnClickListener {
-            startActivity(Intent(this, CasualPostureActivity::class.java))
+            if (CasualPosture.status.compareTo(0) == 0){
+                val intent = Intent(this, ShopPopupActivity::class.java).apply {
+                    putExtra("price", 1000)
+                }
+                startActivityForResult(intent, 1)
+            } else {
+                startActivity(Intent(this, CasualPostureActivity::class.java))
+            }
+        }
+        formalPosturePreview.setOnClickListener {
+            if (FormalPosture.status.compareTo(0) == 0){
+                val intent = Intent(this, ShopPopupActivity::class.java).apply {
+                    putExtra("price", 1000)
+                }
+                startActivityForResult(intent, 2)
+            } else {
+                startActivity(Intent(this, FormalPostureActivity::class.java))
+            }
+        }
+        schoolPosturePreview.setOnClickListener {
+            if (SchoolPosture.status.compareTo(0) == 0){
+                val intent = Intent(this, ShopPopupActivity::class.java).apply {
+                    putExtra("price", 1000)
+                }
+                startActivityForResult(intent, 3)
+            } else {
+                startActivity(Intent(this, SchoolPostureActivity::class.java))
+            }
+        }
+        defaultPosturePreview.setOnClickListener {
+            if (DefaultPosture.status.compareTo(0) == 0){
+                val intent = Intent(this, ShopPopupActivity::class.java).apply {
+                    putExtra("price", 1000)
+                }
+                startActivityForResult(intent, 4)
+            } else {
+                DefaultPosture.status = 2
+                DefaultPosture.draw()
+            }
         }
         backgroundPreview.setOnClickListener {
             startActivity(Intent(this, BackgroundActivity::class.java))
         }
-        formalPosturePreview.setOnClickListener {
-            startActivity(Intent(this, FormalPostureActivity::class.java))
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == 1){
+            when (requestCode){
+                1 -> CasualPosture.status = 1
+                2 -> FormalPosture.status = 1
+                3 -> SchoolPosture.status = 1
+                4 -> DefaultPosture.status = 1
+            }
         }
     }
 
