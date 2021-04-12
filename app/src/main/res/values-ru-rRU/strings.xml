@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="shopText">Магазин</string>
+    <string name="clicks">Клики</string>
+    <string name="coins">Монеты</string>
+    <string name="achievements">Достижения</string>
+    <string name="casual_posture">Повседневная одежда</string>
+    <string name="formal_posture">Костюм</string>
+    <string name="school_posture">Школьная форма</string>
+    <string name="default_posture">Стандартный скин</string>
+    <string name="backgrounds">Фон</string>
+    <string name="are_you_sure_want_by_this_item">уверен что тебе нужна эта шмотка?</string>
+    <string name="yes">Да</string>
+    <string name="no">Нет</string>
+</resources>

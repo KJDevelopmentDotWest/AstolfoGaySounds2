@@ -16,10 +16,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AstolfoGaySounds2">
-        <activity android:name=".activities.SchoolPostureActivity"></activity>
         <activity
             android:name=".activities.ShopPopupActivity"
-            android:theme="@style/AppTheme.Popup"></activity>
+            android:theme="@style/AppTheme.Popup"/>
+        <activity
+            android:name=".activities.SchoolPostureActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activities.FormalPostureActivity"
             android:configChanges="orientation|keyboardHidden"

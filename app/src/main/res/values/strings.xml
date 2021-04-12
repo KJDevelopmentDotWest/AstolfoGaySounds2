@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Astolfo (gay) sounds 2</string>
+    <string name="app_name" translatable="false">Astolfo (gay) sounds 2</string>
     <string name="shopText">Shop</string>
     <string name="clicks">Clicks</string>
     <string name="coins">Coins</string>
@@ -8,9 +8,8 @@
     <string name="formal_posture">Formal Skin</string>
     <string name="school_posture">School Skin</string>
     <string name="default_posture">Default Skin</string>
-    <string name="backgrounds">Backgrounds</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="are_you_sure_want_by_this_item">are you sure want buy this item</string>
+    <string name="backgrounds">Background</string>
+    <string name="are_you_sure_want_by_this_item">are you sure want buy this item?</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
 </resources>
