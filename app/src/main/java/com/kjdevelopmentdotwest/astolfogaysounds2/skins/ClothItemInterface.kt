@@ -2,7 +2,7 @@ package com.kjdevelopmentdotwest.astolfogaysounds2.skins
 
 import android.graphics.Bitmap
 
-interface ClothItem {
+interface ClothItemInterface {
     var resBitmap: Bitmap
     var status: Int
 }

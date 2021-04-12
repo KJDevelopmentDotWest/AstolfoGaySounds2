@@ -7,14 +7,14 @@ import android.widget.Button
 import android.widget.ImageButton
 import com.kjdevelopmentdotwest.astolfogaysounds2.R
 import com.kjdevelopmentdotwest.astolfogaysounds2.skins.FormalPosture
-import com.kjdevelopmentdotwest.astolfogaysounds2.skins.ClothItem
+import com.kjdevelopmentdotwest.astolfogaysounds2.skins.ClothItemInterface
 import com.kjdevelopmentdotwest.astolfogaysounds2.tools.UserData
 
 class FormalPostureActivity : AppCompatActivity() {
     private lateinit var redBlazerButton: Button
     lateinit var blackPantsButton: ImageButton
     lateinit var greenPantsButton: ImageButton
-    private var latestItem: ClothItem? = null
+    private var latestItem: ClothItemInterface? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
