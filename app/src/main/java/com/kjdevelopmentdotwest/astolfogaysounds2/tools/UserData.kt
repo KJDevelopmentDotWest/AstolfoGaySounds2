@@ -9,8 +9,10 @@ class UserData {
     companion object{
         var sharedPreferences: SharedPreferences? = null
 
-        var clickCount : Long = 0
-        var moneyCount : Long = 0
+        var clickCount: Long = 0
+        var moneyCount: Long = 0
+
+        var isMuted: Boolean = false
 
         val casualPostureSkirts = arrayListOf<CasualPostureSkirt>()
 
@@ -26,6 +28,7 @@ class UserData {
             retrieveSchoolPostureData(sharedPreferences!!)
             retrieveDefaultPostureData(sharedPreferences!!)
             retrieveBackgroundData(sharedPreferences!!)
+            retrieveOtherInfo(sharedPreferences!!)
         }
 
         fun saveUserData(){
@@ -36,6 +39,7 @@ class UserData {
             saveSchoolPostureData(editor)
             saveDefaultPostureData(editor)
             saveBackgroundData(editor)
+            saveOtherInfo(editor)
             editor.apply()
         }
 
@@ -96,6 +100,10 @@ class UserData {
             DefaultPosture.status = sharedPreferences.getInt("defaultPosture", 0)
         }
 
+        private fun retrieveOtherInfo(sharedPreferences: SharedPreferences){
+            isMuted = sharedPreferences.getBoolean("isMuted", false)
+        }
+
         private fun saveClickMoneyData(editor: SharedPreferences.Editor){
             editor.putLong("clicks", clickCount)
             editor.putLong("money", moneyCount)
@@ -128,6 +136,10 @@ class UserData {
 
         private fun saveDefaultPostureData(editor: SharedPreferences.Editor){
             editor.putInt("defaultPosture", DefaultPosture.status)
+        }
+
+        private fun saveOtherInfo(editor: SharedPreferences.Editor){
+            editor.putBoolean("isMuted", isMuted)
         }
     }
 }

@@ -47,7 +47,7 @@ class ShopPopupActivity : AppCompatActivity() {
         val width = displayMetrics!!.widthPixels
         val height = displayMetrics.heightPixels
 
-        window.setLayout(width.times(0.6).toInt(), height.times(0.16).toInt())
+        window.setLayout(width.times(0.6).toInt(), height.times(0.17).toInt())
 
         val params = window.attributes
         params.gravity = Gravity.CENTER

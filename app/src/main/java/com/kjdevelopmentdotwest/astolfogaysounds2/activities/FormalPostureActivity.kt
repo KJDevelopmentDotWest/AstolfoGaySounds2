@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageButton
+import android.widget.ImageView
 import com.kjdevelopmentdotwest.astolfogaysounds2.R
 import com.kjdevelopmentdotwest.astolfogaysounds2.skins.FormalPosture
 import com.kjdevelopmentdotwest.astolfogaysounds2.skins.ClothItemInterface

@@ -1,10 +1,12 @@
 package com.kjdevelopmentdotwest.astolfogaysounds2.activities
 
 import android.Manifest
+import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.graphics.BitmapFactory
+import android.media.AudioManager
 import android.media.MediaPlayer
 import android.os.Bundle
 import android.util.DisplayMetrics
@@ -29,7 +31,9 @@ class MainActivity : AppCompatActivity() {
     private lateinit var clickCountTextView: TextView
     private lateinit var moneyCountTextView: TextView
     private lateinit var loadingGifImageView: ImageView
+    private lateinit var muteButton: ImageView
     private lateinit var mediaPlayer: MediaPlayer
+    private lateinit var audioManager: AudioManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,8 +68,22 @@ class MainActivity : AppCompatActivity() {
         achievementsButton = findViewById(R.id.achievementsButton)
         clickCountTextView = findViewById(R.id.clickCountTextView)
         moneyCountTextView = findViewById(R.id.moneyCountTextView)
+        muteButton = findViewById(R.id.muteButton)
 
         mediaPlayer = MediaPlayer.create(this, R.raw.gay_sound_1)
+        audioManager = getSystemService(Context.AUDIO_SERVICE) as AudioManager
+
+        muteButton.setOnClickListener {
+            if (!UserData.isMuted){
+                UserData.isMuted = true
+                muteButton.setImageResource(R.drawable.ic_button_unmute)
+                audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, 0, 0)
+            } else {
+                UserData.isMuted = false
+                muteButton.setImageResource(R.drawable.ic_button_mute)
+                audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, 100, 0)
+            }
+        }
 
         mainImageBackground.setOnClickListener {
             onImageClicked()
@@ -169,6 +187,11 @@ class MainActivity : AppCompatActivity() {
                 mainImage.setImageBitmap(ImageFactory.resultImage)
                 mainImageBackground.setImageBitmap(ImageFactory.resultBackground)
                 loadingGifImageView.setImageResource(android.R.color.transparent)
+                if (!UserData.isMuted){
+                    muteButton.setImageResource(R.drawable.ic_button_mute)
+                } else {
+                    muteButton.setImageResource(R.drawable.ic_button_unmute)
+                }
             }
         }
     }
