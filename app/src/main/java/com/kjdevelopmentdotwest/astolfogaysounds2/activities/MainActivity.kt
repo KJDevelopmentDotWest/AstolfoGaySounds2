@@ -61,7 +61,6 @@ class MainActivity : AppCompatActivity() {
     private fun setUpViews(){
         loadingGifImageView = findViewById(R.id.loadingGif)
         loadingGifImageView.setImageResource(R.drawable.loading_gif)
-        //Glide.with(this).load(R.drawable.loading_gif).into(loadingGifImageView)
         mainImage = findViewById(R.id.mainImage)
         mainImageBackground = findViewById(R.id.mainImageBackground)
         shopButton = findViewById(R.id.shopButton)
