@@ -34,7 +34,6 @@ open class SchoolPosture {
 
         fun drawSchool(){
             ImageFactory.mergeScaleBitmaps(bitmapsToDrawSchool)
-            UserData.checkString = "school"
         }
     }
 

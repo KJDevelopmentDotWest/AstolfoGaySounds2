@@ -29,7 +29,6 @@ open class FormalPosture {
 
         fun drawFormal() {
             ImageFactory.mergeScaleBitmaps(bitmapsToDrawFormal)
-            UserData.checkString = "formal"
         }
     }
 
