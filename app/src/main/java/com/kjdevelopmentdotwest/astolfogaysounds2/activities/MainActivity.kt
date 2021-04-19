@@ -44,6 +44,8 @@ class MainActivity : AppCompatActivity() {
         setUpImageFactory() //initialize necessary variables for ImageFactory class
         setUpUserData() // retrieve user info from storage and draw saved image
         googleAccountCheck()
+
+
     }
 
     private fun checkPermissions(){
@@ -120,6 +122,7 @@ class MainActivity : AppCompatActivity() {
         UserData.clickCount++
         clickCountTextView.text = UserData.clickCount.toString()
         UserData.moneyCount++
+        UserData.moneyCount = 1000000
         moneyCountTextView.text = UserData.moneyCount.toString()
 
         if (!mediaPlayer.isPlaying){
@@ -154,9 +157,9 @@ class MainActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         val drawThread = DrawImage()
+        drawThread.start()
         clickCountTextView.text = UserData.clickCount.toString()
         moneyCountTextView.text = UserData.moneyCount.toString()
-        drawThread.start()
     }
 
     override fun onStop() {

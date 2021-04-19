@@ -4,10 +4,10 @@ import android.graphics.Bitmap
 
 //status 0 - not sold, 1 - sold, 2 - equipped
 
-class CasualPostureSkirt(var resBitmap: Bitmap, var status: Int): CasualPosture() {
+class CasualPostureSkirt(override var resBitmap: Bitmap, override var status: Int): CasualPosture(), ClothItemInterface {
 
-    override fun draw(){
+    override fun drawCasual(){
         skirtBitmap = resBitmap
-        super.draw()
+        super.drawCasual()
     }
 }

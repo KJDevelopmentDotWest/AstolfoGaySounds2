@@ -9,6 +9,6 @@ class FormalPostureBlazer(override var resBitmap: Bitmap, override var status: I
 
     override fun addToDrawQueue(){
         super.addToDrawQueue()
-        bitmapsToDraw[1] = Item(resBitmap, BLAZER_OFFSET_LEFT, BLAZER_OFFSET_TOP)
+        bitmapsToDrawFormal[1] = Item(resBitmap, BLAZER_OFFSET_LEFT, BLAZER_OFFSET_TOP)
     }
 }

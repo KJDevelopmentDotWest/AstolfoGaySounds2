@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageButton
-import android.widget.ImageView
 import com.kjdevelopmentdotwest.astolfogaysounds2.R
 import com.kjdevelopmentdotwest.astolfogaysounds2.skins.FormalPosture
 import com.kjdevelopmentdotwest.astolfogaysounds2.skins.ClothItemInterface
@@ -13,8 +12,8 @@ import com.kjdevelopmentdotwest.astolfogaysounds2.tools.UserData
 
 class FormalPostureActivity : AppCompatActivity() {
     private lateinit var redBlazerButton: Button
-    lateinit var blackPantsButton: ImageButton
-    lateinit var greenPantsButton: ImageButton
+    private lateinit var blackPantsButton: ImageButton
+    private lateinit var greenPantsButton: ImageButton
     private var latestItem: ClothItemInterface? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -56,6 +55,7 @@ class FormalPostureActivity : AppCompatActivity() {
 
         if (UserData.formalPostureBlazers[place].status.compareTo(1) == 0) {
             UserData.formalPostureBlazers[place].addToDrawQueue()
+            FormalPosture.drawFormal()
             UserData.formalPostureBlazers.forEach{
                 if (it.status == 2){
                     it.status = 1
@@ -63,7 +63,6 @@ class FormalPostureActivity : AppCompatActivity() {
                 }
             }
             UserData.formalPostureBlazers[place].status = 2
-            FormalPosture.draw()
         }
     }
 
@@ -79,6 +78,7 @@ class FormalPostureActivity : AppCompatActivity() {
 
         if (UserData.formalPosturePants[place].status.compareTo(1) == 0){
             UserData.formalPosturePants[place].addToDrawQueue()
+            FormalPosture.drawFormal()
             UserData.formalPosturePants.forEach{
                 if (it.status == 2){
                     it.status = 1
@@ -86,7 +86,6 @@ class FormalPostureActivity : AppCompatActivity() {
                 }
             }
             UserData.formalPosturePants[place].status = 2
-            FormalPosture.draw()
         }
     }
 

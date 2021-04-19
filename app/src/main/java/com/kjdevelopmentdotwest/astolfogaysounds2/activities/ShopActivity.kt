@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.widget.ImageView
 import com.kjdevelopmentdotwest.astolfogaysounds2.R
 import com.kjdevelopmentdotwest.astolfogaysounds2.skins.*
+import com.kjdevelopmentdotwest.astolfogaysounds2.skins.schoolPosture.SchoolPosture
 
 class ShopActivity : AppCompatActivity() {
     private lateinit var casualPosturePreview: ImageView
@@ -59,15 +60,7 @@ class ShopActivity : AppCompatActivity() {
             }
         }
         defaultPosturePreview.setOnClickListener {
-            if (DefaultPosture.status.compareTo(0) == 0){
-                val intent = Intent(this, ShopPopupActivity::class.java).apply {
-                    putExtra("price", 1000)
-                }
-                startActivityForResult(intent, 4)
-            } else {
-                DefaultPosture.status = 2
-                DefaultPosture.draw()
-            }
+            DefaultPosture.drawDefault()
         }
         backgroundPreview.setOnClickListener {
             startActivity(Intent(this, BackgroundActivity::class.java))

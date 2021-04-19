@@ -4,6 +4,7 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import com.kjdevelopmentdotwest.astolfogaysounds2.tools.ImageFactory
 import com.kjdevelopmentdotwest.astolfogaysounds2.R
+import com.kjdevelopmentdotwest.astolfogaysounds2.skins.schoolPosture.SchoolPosture
 import com.kjdevelopmentdotwest.astolfogaysounds2.tools.Item
 
 //status 0 - not sold, 1 - sold, 2 - equipped
@@ -18,13 +19,13 @@ open class CasualPosture{
         var baseBitmap: Bitmap = BitmapFactory.decodeResource(ImageFactory.resources, R.drawable.casual_astolfo)
         var previewBitmap: Bitmap = ImageFactory.generatePreview(BitmapFactory.decodeResource(ImageFactory.resources, R.drawable.casual_astolfo))
         var skirtBitmap: Bitmap = BitmapFactory.decodeResource(ImageFactory.resources, R.drawable.casual_skirt_black)
-        var bitmapsToDraw: ArrayList<Item> = arrayListOf(
+        var bitmapsToDrawCasual: ArrayList<Item> = arrayListOf(
             Item(baseBitmap, 0f, 0f),
             Item(skirtBitmap, 0.5f, 0.5f))
     }
 
-    open fun draw(){
-        ImageFactory.mergeScaleBitmaps(baseBitmap, skirtBitmap)
+    open fun drawCasual(){
+        ImageFactory.mergeScaleBitmaps(bitmapsToDrawCasual)
     }
 
     open fun addToDrawQueue(){
