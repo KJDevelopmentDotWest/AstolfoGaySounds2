@@ -20,6 +20,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.kjdevelopmentdotwest.astolfogaysounds2.tools.ImageFactory
 import com.kjdevelopmentdotwest.astolfogaysounds2.R
 import com.kjdevelopmentdotwest.astolfogaysounds2.skins.*
+import com.kjdevelopmentdotwest.astolfogaysounds2.skins.schoolPosture.SchoolPosture
 import com.kjdevelopmentdotwest.astolfogaysounds2.tools.UserData
 
 class MainActivity : AppCompatActivity() {
@@ -162,8 +163,8 @@ class MainActivity : AppCompatActivity() {
         moneyCountTextView.text = UserData.moneyCount.toString()
     }
 
-    override fun onStop() {
-        super.onStop()
+    override fun onPause() {
+        super.onPause()
         mediaPlayer.stop()
         val saveThread = SaveUserDataThread()
         saveThread.priority = Thread.MAX_PRIORITY
@@ -182,18 +183,35 @@ class MainActivity : AppCompatActivity() {
     inner class RetrieveUserDataAndDrawImageThread: Thread(){
         override fun run() {
             UserData.sharedPreferences = getSharedPreferences("data", MODE_PRIVATE)
+            UserData.sharedPreferencesStatus = getSharedPreferences("status", MODE_PRIVATE)
             UserData.retrieveUserData()
             runOnUiThread {
                 clickCountTextView.text = UserData.clickCount.toString()
                 moneyCountTextView.text = UserData.moneyCount.toString()
-                mainImage.setImageBitmap(ImageFactory.resultImage)
-                mainImageBackground.setImageBitmap(ImageFactory.resultBackground)
                 loadingGifImageView.setImageResource(android.R.color.transparent)
                 if (!UserData.isMuted){
                     muteButton.setImageResource(R.drawable.ic_button_mute)
                 } else {
                     muteButton.setImageResource(R.drawable.ic_button_unmute)
                 }
+//                if (SchoolPosture.status == 2){
+//                    SchoolPosture.draw()
+//                }
+//                if (FormalPosture.status == 2){
+//                    FormalPosture.draw()
+//                }
+////                if (CasualPosture.status == 2){
+////                    CasualPosture.drawCasual()
+////                }
+//                if (DefaultPosture.status == 2){
+//                    DefaultPosture.draw()
+//                }
+                //if (UserData.casualPostureStatus == 2)
+                if (UserData.defaultPostureStatus == 2) DefaultPosture.draw()
+                if (UserData.formalPostureStatus == 2) FormalPosture.draw()
+                if (UserData.schoolPostureStatus == 2) SchoolPosture.draw()
+                mainImage.setImageBitmap(ImageFactory.resultImage)
+                mainImageBackground.setImageBitmap(ImageFactory.resultBackground)
             }
         }
     }

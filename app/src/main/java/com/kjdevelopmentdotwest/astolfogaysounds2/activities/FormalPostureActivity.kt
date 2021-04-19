@@ -37,11 +37,12 @@ class FormalPostureActivity : AppCompatActivity() {
         }
     }
 
-    override fun onStop() {
-        super.onStop()
+    override fun onPause() {
+        super.onPause()
         val saveThread = SaveUserDataThread()
         saveThread.priority = Thread.MAX_PRIORITY
         saveThread.start()
+        FormalPosture.draw()
     }
 
     private fun onBlazerSelect(place: Int){
@@ -55,7 +56,7 @@ class FormalPostureActivity : AppCompatActivity() {
 
         if (UserData.formalPostureBlazers[place].status.compareTo(1) == 0) {
             UserData.formalPostureBlazers[place].addToDrawQueue()
-            FormalPosture.drawFormal()
+            FormalPosture.draw()
             UserData.formalPostureBlazers.forEach{
                 if (it.status == 2){
                     it.status = 1
@@ -78,7 +79,7 @@ class FormalPostureActivity : AppCompatActivity() {
 
         if (UserData.formalPosturePants[place].status.compareTo(1) == 0){
             UserData.formalPosturePants[place].addToDrawQueue()
-            FormalPosture.drawFormal()
+            FormalPosture.draw()
             UserData.formalPosturePants.forEach{
                 if (it.status == 2){
                     it.status = 1

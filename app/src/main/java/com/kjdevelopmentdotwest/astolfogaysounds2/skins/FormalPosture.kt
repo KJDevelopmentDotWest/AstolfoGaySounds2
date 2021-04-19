@@ -12,7 +12,6 @@ import com.kjdevelopmentdotwest.astolfogaysounds2.tools.UserData
 
 open class FormalPosture {
     companion object{
-        var status: Int = 0
 
         const val BLAZER_OFFSET_LEFT = 0.529f
         const val BLAZER_OFFSET_TOP = 0.568f
@@ -27,21 +26,16 @@ open class FormalPosture {
             Item(blazerBitmap, BLAZER_OFFSET_LEFT, BLAZER_OFFSET_TOP),
             Item(pantsBitmap, PANTS_OFFSET_LEFT, PANTS_OFFSET_TOP))
 
-        fun drawFormal() {
+        fun draw() {
+            UserData.formalPostureStatus = 2
+            if (UserData.casualPostureStatus == 2) UserData.casualPostureStatus = 1
+            if (UserData.defaultPostureStatus == 2) UserData.defaultPostureStatus = 1
+            if (UserData.schoolPostureStatus == 2) UserData.schoolPostureStatus = 1
             ImageFactory.mergeScaleBitmaps(bitmapsToDrawFormal)
         }
     }
 
     open fun  addToDrawQueue(){
-        if (CasualPosture.status.compareTo(2) == 0){
-            CasualPosture.status = 1
-        }
-        if (DefaultPosture.status.compareTo(2) == 0){
-            DefaultPosture.status = 1
-        }
-        if (SchoolPosture.status.compareTo(2) == 0){
-            SchoolPosture.status = 1
-        }
-        status = 2
+
     }
 }

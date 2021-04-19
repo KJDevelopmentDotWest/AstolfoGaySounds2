@@ -3,10 +3,12 @@ package com.kjdevelopmentdotwest.astolfogaysounds2.activities
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.UserHandle
 import android.widget.ImageView
 import com.kjdevelopmentdotwest.astolfogaysounds2.R
 import com.kjdevelopmentdotwest.astolfogaysounds2.skins.*
 import com.kjdevelopmentdotwest.astolfogaysounds2.skins.schoolPosture.SchoolPosture
+import com.kjdevelopmentdotwest.astolfogaysounds2.tools.UserData
 
 class ShopActivity : AppCompatActivity() {
     private lateinit var casualPosturePreview: ImageView
@@ -30,7 +32,7 @@ class ShopActivity : AppCompatActivity() {
         drawImagesThread.start()
 
         casualPosturePreview.setOnClickListener {
-            if (CasualPosture.status.compareTo(0) == 0){
+            if (UserData.casualPostureStatus == 0){
                 val intent = Intent(this, ShopPopupActivity::class.java).apply {
                     putExtra("price", 1000)
                 }
@@ -40,7 +42,7 @@ class ShopActivity : AppCompatActivity() {
             }
         }
         formalPosturePreview.setOnClickListener {
-            if (FormalPosture.status.compareTo(0) == 0){
+            if (UserData.formalPostureStatus == 0){
                 val intent = Intent(this, ShopPopupActivity::class.java).apply {
                     putExtra("price", 1000)
                 }
@@ -50,7 +52,7 @@ class ShopActivity : AppCompatActivity() {
             }
         }
         schoolPosturePreview.setOnClickListener {
-            if (SchoolPosture.status.compareTo(0) == 0){
+            if (UserData.schoolPostureStatus == 0){
                 val intent = Intent(this, ShopPopupActivity::class.java).apply {
                     putExtra("price", 1000)
                 }
@@ -60,7 +62,7 @@ class ShopActivity : AppCompatActivity() {
             }
         }
         defaultPosturePreview.setOnClickListener {
-            DefaultPosture.drawDefault()
+            DefaultPosture.draw()
         }
         backgroundPreview.setOnClickListener {
             startActivity(Intent(this, BackgroundActivity::class.java))
@@ -71,11 +73,24 @@ class ShopActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == 1){
             when (requestCode){
-                1 -> CasualPosture.status = 1
-                2 -> FormalPosture.status = 1
-                3 -> SchoolPosture.status = 1
-                4 -> DefaultPosture.status = 1
+                1 -> UserData.casualPostureStatus = 1
+                2 -> UserData.formalPostureStatus = 1
+                3 -> UserData.schoolPostureStatus = 1
+                4 -> UserData.defaultPostureStatus = 1
             }
+        }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        val saveThread = SaveUserDataThread()
+        saveThread.priority = Thread.MAX_PRIORITY
+        saveThread.start()
+    }
+
+    inner class SaveUserDataThread: Thread(){
+        override fun run(){
+            UserData.saveUserData()
         }
     }
 

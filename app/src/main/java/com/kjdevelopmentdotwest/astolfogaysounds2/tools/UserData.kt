@@ -12,9 +12,15 @@ import com.kjdevelopmentdotwest.astolfogaysounds2.skins.schoolPosture.SchoolPost
 class UserData {
     companion object{
         var sharedPreferences: SharedPreferences? = null
+        var sharedPreferencesStatus: SharedPreferences? = null
 
         var clickCount: Long = 0
         var moneyCount: Long = 0
+
+        var defaultPostureStatus = 0
+        var casualPostureStatus = 0
+        var formalPostureStatus = 0
+        var schoolPostureStatus = 0
 
         var isMuted: Boolean = false
 
@@ -29,9 +35,8 @@ class UserData {
 
         val backgrounds = arrayListOf<Background>()
 
-        var checkString: String = ""
-
         fun retrieveUserData(){
+            retrieveStatusInfo(sharedPreferencesStatus!!)
             retrieveClickMoneyData(sharedPreferences!!)
             retrieveCasualPostureData(sharedPreferences!!)
             retrieveFormalPostureData(sharedPreferences!!)
@@ -43,6 +48,8 @@ class UserData {
 
         fun saveUserData(){
             val editor = sharedPreferences!!.edit()
+            val editorStatus = sharedPreferencesStatus!!.edit()
+            saveStatusInfo(editorStatus)
             saveClickMoneyData(editor)
             saveCasualPostureData(editor)
             saveFormalPostureData(editor)
@@ -51,6 +58,7 @@ class UserData {
             saveBackgroundData(editor)
             saveOtherInfo(editor)
             editor.apply()
+            editorStatus.apply()
         }
 
         private fun retrieveClickMoneyData(sharedPreferences: SharedPreferences){
@@ -70,7 +78,6 @@ class UserData {
         }
 
         private fun retrieveCasualPostureData(sharedPreferences: SharedPreferences){
-            CasualPosture.status = sharedPreferences.getInt("casualPosture", 0)
             casualPostureSkirts.add(CasualPostureSkirt(BitmapFactory.decodeResource(ImageFactory.resources, R.drawable.casual_skirt_black), sharedPreferences.getInt("blackSkirt", 0)))
             casualPostureSkirts.add(CasualPostureSkirt(BitmapFactory.decodeResource(ImageFactory.resources, R.drawable.casual_skirt_green), sharedPreferences.getInt("greenSkirt", 0)))
             casualPostureSkirts.forEach {
@@ -82,7 +89,6 @@ class UserData {
         }
 
         private fun retrieveFormalPostureData(sharedPreferences: SharedPreferences){
-            FormalPosture.status = sharedPreferences.getInt("formalPosture", 0)
 
             formalPostureBlazers.add(FormalPostureBlazer(BitmapFactory.decodeResource(ImageFactory.resources, R.drawable.formal_blazer_red), sharedPreferences.getInt("formalBlazerRed", 0)))
             formalPostureBlazers.forEach {
@@ -100,14 +106,9 @@ class UserData {
                     return@forEach
                 }
             }
-
-            if (FormalPosture.status == 2){
-                FormalPosture.drawFormal()
-            }
         }
 
         private fun retrieveSchoolPostureData(sharedPreferences: SharedPreferences){
-            SchoolPosture.status = sharedPreferences.getInt("schoolPosture", 0)
 
             schoolPostureShirts.add(SchoolPostureShirt(BitmapFactory.decodeResource(ImageFactory.resources, R.drawable.school_shirt_white), sharedPreferences.getInt("schoolShirtWhite", 0)))
             schoolPostureShirts.forEach {
@@ -132,17 +133,23 @@ class UserData {
                     return@forEach
                 }
             }
-
-            if (SchoolPosture.status == 2){
-                SchoolPosture.drawSchool()
-            }
         }
 
         private fun retrieveDefaultPostureData(sharedPreferences: SharedPreferences){
-            DefaultPosture.status = sharedPreferences.getInt("defaultPosture", 0)
             if (DefaultPosture.status == 2){
-                DefaultPosture.drawDefault()
+                DefaultPosture.draw()
             }
+        }
+
+        private fun retrieveStatusInfo(sharedPreferences: SharedPreferences){
+//            SchoolPosture.status = sharedPreferences.getInt("schoolPosture", 0)
+//            FormalPosture.status = sharedPreferences.getInt("formalPosture", 0)
+//            CasualPosture.status = sharedPreferences.getInt("casualPosture", 0)
+//            DefaultPosture.status = sharedPreferences.getInt("defaultPosture", 0)
+            schoolPostureStatus = sharedPreferences.getInt("schoolPosture", 0)
+            formalPostureStatus = sharedPreferences.getInt("formalPosture", 0)
+            casualPostureStatus = sharedPreferences.getInt("casualPosture", 0)
+            defaultPostureStatus = sharedPreferences.getInt("defaultPosture", 0)
         }
 
         private fun retrieveOtherInfo(sharedPreferences: SharedPreferences){
@@ -162,8 +169,6 @@ class UserData {
         private fun saveCasualPostureData(editor: SharedPreferences.Editor){
             editor.putInt("blackSkirt", casualPostureSkirts[0].status)
             editor.putInt("greenSkirt", casualPostureSkirts[1].status)
-
-            editor.putInt("casualPosture", CasualPosture.status)
         }
 
         private fun saveFormalPostureData(editor: SharedPreferences.Editor){
@@ -171,8 +176,6 @@ class UserData {
 
             editor.putInt("formalPantsBlack", formalPosturePants[0].status)
             editor.putInt("formalPantsGreen", formalPosturePants[1].status)
-
-            editor.putInt("formalPosture", FormalPosture.status)
         }
 
         private fun saveSchoolPostureData(editor: SharedPreferences.Editor){
@@ -181,12 +184,22 @@ class UserData {
             editor.putInt("schoolSkirtPink", schoolPostureSkirts[0].status)
 
             editor.putInt("schoolStockingsWhite", schoolPostureStockings[0].status)
-
-            editor.putInt("schoolPosture", SchoolPosture.status)
         }
 
         private fun saveDefaultPostureData(editor: SharedPreferences.Editor){
-            editor.putInt("defaultPosture", DefaultPosture.status)
+            //editor.putInt("defaultPosture", DefaultPosture.status)
+        }
+
+        private fun saveStatusInfo(editor: SharedPreferences.Editor){
+//            editor.putInt("defaultPosture", DefaultPosture.status)
+//            editor.putInt("schoolPosture", SchoolPosture.status)
+//            editor.putInt("casualPosture", CasualPosture.status)
+//            editor.putInt("formalPosture", FormalPosture.status)
+
+            editor.putInt("defaultPosture", defaultPostureStatus)
+            editor.putInt("schoolPosture", schoolPostureStatus)
+            editor.putInt("casualPosture", casualPostureStatus)
+            editor.putInt("formalPosture", formalPostureStatus)
         }
 
         private fun saveOtherInfo(editor: SharedPreferences.Editor){

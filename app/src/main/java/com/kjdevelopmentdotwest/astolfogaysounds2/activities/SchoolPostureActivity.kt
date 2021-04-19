@@ -46,7 +46,6 @@ class SchoolPostureActivity : AppCompatActivity() {
         }
         if (UserData.schoolPostureShirts[place].status == 1){
             UserData.schoolPostureShirts[place].addToDrawQueue()
-            SchoolPosture.drawSchool()
             UserData.schoolPostureShirts.forEach {
                 if (it.status == 2){
                     it.status = 1
@@ -67,7 +66,6 @@ class SchoolPostureActivity : AppCompatActivity() {
         }
         if (UserData.schoolPostureSkirts[place].status == 1){
             UserData.schoolPostureSkirts[place].addToDrawQueue()
-            SchoolPosture.drawSchool()
             UserData.schoolPostureSkirts.forEach {
                 if (it.status == 2){
                     it.status = 1
@@ -88,7 +86,6 @@ class SchoolPostureActivity : AppCompatActivity() {
         }
         if (UserData.schoolPostureStockings[place].status == 1){
             UserData.schoolPostureStockings[place].addToDrawQueue()
-            SchoolPosture.drawSchool()
             UserData.schoolPostureStockings.forEach {
                 if (it.status == 2){
                     it.status = 1
@@ -99,11 +96,12 @@ class SchoolPostureActivity : AppCompatActivity() {
         }
     }
 
-    override fun onStop() {
-        super.onStop()
+    override fun onPause() {
+        super.onPause()
         val saveThread = SaveUserDataThread()
         saveThread.priority = Thread.MAX_PRIORITY
         saveThread.start()
+        SchoolPosture.draw()
     }
 
     inner class SaveUserDataThread: Thread(){

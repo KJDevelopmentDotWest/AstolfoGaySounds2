@@ -29,15 +29,6 @@ open class CasualPosture{
     }
 
     open fun addToDrawQueue(){
-        if (FormalPosture.status.compareTo(2) == 0){
-            FormalPosture.status = 1
-        }
-        if (DefaultPosture.status.compareTo(2) == 0){
-            DefaultPosture.status = 1
-        }
-        if (SchoolPosture.status.compareTo(2) == 0){
-            SchoolPosture.status = 1
-        }
-        status = 2
+
     }
 }

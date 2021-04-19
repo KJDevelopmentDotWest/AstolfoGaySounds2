@@ -14,16 +14,7 @@ open class DefaultPosture {
         var baseBitmap: Bitmap = BitmapFactory.decodeResource(ImageFactory.resources, R.drawable.default_astolfo)
         var previewBitmap: Bitmap = ImageFactory.generatePreview(BitmapFactory.decodeResource(ImageFactory.resources, R.drawable.default_astolfo))
 
-        fun drawDefault(){
-            if (CasualPosture.status == 2){
-                CasualPosture.status = 1
-            }
-            if (FormalPosture.status == 2){
-                FormalPosture.status = 1
-            }
-            if (SchoolPosture.status == 2){
-                SchoolPosture.status = 1
-            }
+        fun draw(){
             status = 2
             ImageFactory.mergeScaleBitmaps(arrayListOf(Item(baseBitmap, 0f, 0f)))
         }
