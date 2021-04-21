@@ -4,10 +4,7 @@ import android.content.SharedPreferences
 import android.graphics.BitmapFactory
 import com.kjdevelopmentdotwest.astolfogaysounds2.R
 import com.kjdevelopmentdotwest.astolfogaysounds2.skins.*
-import com.kjdevelopmentdotwest.astolfogaysounds2.skins.schoolPosture.SchoolPosture
-import com.kjdevelopmentdotwest.astolfogaysounds2.skins.schoolPosture.SchoolPostureShirt
-import com.kjdevelopmentdotwest.astolfogaysounds2.skins.schoolPosture.SchoolPostureSkirt
-import com.kjdevelopmentdotwest.astolfogaysounds2.skins.schoolPosture.SchoolPostureStockings
+import com.kjdevelopmentdotwest.astolfogaysounds2.skins.schoolPosture.*
 
 class UserData {
     companion object{
@@ -36,7 +33,8 @@ class UserData {
         val backgrounds = arrayListOf<Background>()
 
         fun retrieveUserData(){
-            retrieveStatusInfo(sharedPreferencesStatus!!)
+            //retrieveStatusInfo(sharedPreferencesStatus!!)
+            retrieveStatusInfo(sharedPreferences!!)
             retrieveClickMoneyData(sharedPreferences!!)
             retrieveCasualPostureData(sharedPreferences!!)
             retrieveFormalPostureData(sharedPreferences!!)
@@ -48,8 +46,9 @@ class UserData {
 
         fun saveUserData(){
             val editor = sharedPreferences!!.edit()
-            val editorStatus = sharedPreferencesStatus!!.edit()
-            saveStatusInfo(editorStatus)
+            //val editorStatus = sharedPreferencesStatus!!.edit()
+            //saveStatusInfo(editorStatus)
+            saveStatusInfo(editor)
             saveClickMoneyData(editor)
             saveCasualPostureData(editor)
             saveFormalPostureData(editor)
@@ -58,7 +57,7 @@ class UserData {
             saveBackgroundData(editor)
             saveOtherInfo(editor)
             editor.apply()
-            editorStatus.apply()
+            //editorStatus.apply()
         }
 
         private fun retrieveClickMoneyData(sharedPreferences: SharedPreferences){
@@ -111,6 +110,7 @@ class UserData {
         private fun retrieveSchoolPostureData(sharedPreferences: SharedPreferences){
 
             schoolPostureShirts.add(SchoolPostureShirt(BitmapFactory.decodeResource(ImageFactory.resources, R.drawable.school_shirt_white), sharedPreferences.getInt("schoolShirtWhite", 0)))
+            schoolPostureShirts.add(SchoolPostureShirt(BitmapFactory.decodeResource(ImageFactory.resources, R.drawable.school_shirt_blue), sharedPreferences.getInt("schoolShirtBlue", 0)))
             schoolPostureShirts.forEach {
                 if (it.status == 2){
                     it.addToDrawQueue()
@@ -119,6 +119,7 @@ class UserData {
             }
 
             schoolPostureSkirts.add(SchoolPostureSkirt(BitmapFactory.decodeResource(ImageFactory.resources, R.drawable.school_skirt_pink), sharedPreferences.getInt("schoolSkirtPink", 0)))
+            schoolPostureSkirts.add(SchoolPostureSkirt(BitmapFactory.decodeResource(ImageFactory.resources, R.drawable.school_skirt_blue), sharedPreferences.getInt("schoolSkirtBlue", 0)))
             schoolPostureSkirts.forEach {
                 if (it.status == 2){
                     it.addToDrawQueue()
@@ -127,6 +128,7 @@ class UserData {
             }
 
             schoolPostureStockings.add(SchoolPostureStockings(BitmapFactory.decodeResource(ImageFactory.resources, R.drawable.school_stockings_white), sharedPreferences.getInt("schoolStockingsWhite", 0)))
+            schoolPostureStockings.add(SchoolPostureStockings(BitmapFactory.decodeResource(ImageFactory.resources, R.drawable.school_stockings_blue), sharedPreferences.getInt("schoolStockingsBlue", 0)))
             schoolPostureStockings.forEach {
                 if (it.status == 2){
                     it.addToDrawQueue()
@@ -142,10 +144,6 @@ class UserData {
         }
 
         private fun retrieveStatusInfo(sharedPreferences: SharedPreferences){
-//            SchoolPosture.status = sharedPreferences.getInt("schoolPosture", 0)
-//            FormalPosture.status = sharedPreferences.getInt("formalPosture", 0)
-//            CasualPosture.status = sharedPreferences.getInt("casualPosture", 0)
-//            DefaultPosture.status = sharedPreferences.getInt("defaultPosture", 0)
             schoolPostureStatus = sharedPreferences.getInt("schoolPosture", 0)
             formalPostureStatus = sharedPreferences.getInt("formalPosture", 0)
             casualPostureStatus = sharedPreferences.getInt("casualPosture", 0)
@@ -180,10 +178,13 @@ class UserData {
 
         private fun saveSchoolPostureData(editor: SharedPreferences.Editor){
             editor.putInt("schoolShirtWhite", schoolPostureShirts[0].status)
+            editor.putInt("schoolShirtBlue", schoolPostureShirts[1].status)
 
             editor.putInt("schoolSkirtPink", schoolPostureSkirts[0].status)
+            editor.putInt("schoolSkirtBlue", schoolPostureSkirts[1].status)
 
             editor.putInt("schoolStockingsWhite", schoolPostureStockings[0].status)
+            editor.putInt("schoolStockingsBlue", schoolPostureStockings[1].status)
         }
 
         private fun saveDefaultPostureData(editor: SharedPreferences.Editor){
@@ -191,11 +192,6 @@ class UserData {
         }
 
         private fun saveStatusInfo(editor: SharedPreferences.Editor){
-//            editor.putInt("defaultPosture", DefaultPosture.status)
-//            editor.putInt("schoolPosture", SchoolPosture.status)
-//            editor.putInt("casualPosture", CasualPosture.status)
-//            editor.putInt("formalPosture", FormalPosture.status)
-
             editor.putInt("defaultPosture", defaultPostureStatus)
             editor.putInt("schoolPosture", schoolPostureStatus)
             editor.putInt("casualPosture", casualPostureStatus)

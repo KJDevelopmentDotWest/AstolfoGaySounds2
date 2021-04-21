@@ -11,8 +11,11 @@ import com.kjdevelopmentdotwest.astolfogaysounds2.tools.UserData
 
 class SchoolPostureActivity : AppCompatActivity() {
     private lateinit var shirtWhiteButton: ImageButton
+    private lateinit var shirtBlueButton: ImageButton
     private lateinit var skirtPinkButton: ImageButton
+    private lateinit var skirtBlueButton: ImageButton
     private lateinit var stockingsWhiteButton: ImageButton
+    private lateinit var stockingsBlueButton: ImageButton
     private var latestItem: ClothItemInterface? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,19 +23,34 @@ class SchoolPostureActivity : AppCompatActivity() {
         setContentView(R.layout.activity_school_posture)
 
         shirtWhiteButton = findViewById(R.id.schoolShirtWhite)
+        shirtBlueButton = findViewById(R.id.schoolShirtBlue)
         skirtPinkButton = findViewById(R.id.schoolSkirtPink)
+        skirtBlueButton = findViewById(R.id.schoolSkirtBlue)
         stockingsWhiteButton = findViewById(R.id.schoolStockingsWhite)
+        stockingsBlueButton = findViewById(R.id.schoolStockingsBlue)
 
         shirtWhiteButton.setOnClickListener {
             onShirtSelect(0)
+        }
+
+        shirtBlueButton.setOnClickListener {
+            onShirtSelect(1)
         }
 
         skirtPinkButton.setOnClickListener {
             onSkirtSelect(0)
         }
 
+        skirtBlueButton.setOnClickListener {
+            onSkirtSelect(1)
+        }
+
         stockingsWhiteButton.setOnClickListener {
             onStockingsSelect(0)
+        }
+
+        stockingsBlueButton.setOnClickListener {
+            onStockingsSelect(1)
         }
     }
 

@@ -18,7 +18,7 @@ class ImageFactory {
 
         private fun getRes(){
             imageWidth = displayMetrics!!.widthPixels
-            imageHeight = displayMetrics!!.heightPixels - (24) * displayMetrics!!.density.toInt() // 24dp status bar
+            imageHeight = displayMetrics!!.heightPixels - (24 + 26) * displayMetrics!!.density.toInt() // 24dp status bar 26dp clicks info
         }
 
         @Deprecated("")
@@ -45,12 +45,14 @@ class ImageFactory {
                 tempCanvas.drawBitmap(it.res, finalOffsetLeft, finalOffsetTop, null)
             }
 
-//            val result = Bitmap.createBitmap(imageWidth, imageHeight, Bitmap.Config.ARGB_8888)
-//            val canvas = Canvas(result)
-//
-//            canvas.drawBitmap(Bitmap.createScaledBitmap(preResult, imageWidth, imageHeight, true), 0f, 0f, null)
+            val ratio = (imageHeight-20).toFloat().div(resources[0].res.height)
 
-            resultImage = preResult
+            val result = Bitmap.createBitmap(imageWidth, imageHeight, Bitmap.Config.ARGB_8888)
+            val canvas = Canvas(result)
+
+            canvas.drawBitmap(Bitmap.createScaledBitmap(preResult, resources[0].res.width.times(ratio).toInt(), resources[0].res.height.times(ratio).toInt(), true), 0f, 0f, null)
+
+            resultImage = result
         }
 
         fun generatePreview(src: Bitmap): Bitmap{
