@@ -12,10 +12,13 @@ import com.kjdevelopmentdotwest.astolfogaysounds2.tools.UserData
 class SchoolPostureActivity : AppCompatActivity() {
     private lateinit var shirtWhiteButton: ImageButton
     private lateinit var shirtBlueButton: ImageButton
+    private lateinit var shirtPurpleButton: ImageButton
     private lateinit var skirtPinkButton: ImageButton
     private lateinit var skirtBlueButton: ImageButton
+    private lateinit var skirtPurpleButton: ImageButton
     private lateinit var stockingsWhiteButton: ImageButton
     private lateinit var stockingsBlueButton: ImageButton
+    private lateinit var stockingsPurpleButton: ImageButton
     private var latestItem: ClothItemInterface? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,10 +27,13 @@ class SchoolPostureActivity : AppCompatActivity() {
 
         shirtWhiteButton = findViewById(R.id.schoolShirtWhite)
         shirtBlueButton = findViewById(R.id.schoolShirtBlue)
+        shirtPurpleButton = findViewById(R.id.schoolShirtPurple)
         skirtPinkButton = findViewById(R.id.schoolSkirtPink)
         skirtBlueButton = findViewById(R.id.schoolSkirtBlue)
+        skirtPurpleButton = findViewById(R.id.schoolSkirtPurple)
         stockingsWhiteButton = findViewById(R.id.schoolStockingsWhite)
         stockingsBlueButton = findViewById(R.id.schoolStockingsBlue)
+        stockingsPurpleButton = findViewById(R.id.schoolStockingsPurple)
 
         shirtWhiteButton.setOnClickListener {
             onShirtSelect(0)
@@ -35,6 +41,10 @@ class SchoolPostureActivity : AppCompatActivity() {
 
         shirtBlueButton.setOnClickListener {
             onShirtSelect(1)
+        }
+
+        shirtPurpleButton.setOnClickListener {
+            onShirtSelect(2)
         }
 
         skirtPinkButton.setOnClickListener {
@@ -45,6 +55,10 @@ class SchoolPostureActivity : AppCompatActivity() {
             onSkirtSelect(1)
         }
 
+        skirtPurpleButton.setOnClickListener {
+            onSkirtSelect(2)
+        }
+
         stockingsWhiteButton.setOnClickListener {
             onStockingsSelect(0)
         }
@@ -52,6 +66,11 @@ class SchoolPostureActivity : AppCompatActivity() {
         stockingsBlueButton.setOnClickListener {
             onStockingsSelect(1)
         }
+
+        stockingsPurpleButton.setOnClickListener {
+            onStockingsSelect(2)
+        }
+
     }
 
     private fun onShirtSelect(place: Int){

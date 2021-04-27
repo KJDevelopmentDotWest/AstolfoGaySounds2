@@ -111,6 +111,7 @@ class UserData {
 
             schoolPostureShirts.add(SchoolPostureShirt(BitmapFactory.decodeResource(ImageFactory.resources, R.drawable.school_shirt_white), sharedPreferences.getInt("schoolShirtWhite", 0)))
             schoolPostureShirts.add(SchoolPostureShirt(BitmapFactory.decodeResource(ImageFactory.resources, R.drawable.school_shirt_blue), sharedPreferences.getInt("schoolShirtBlue", 0)))
+            schoolPostureShirts.add(SchoolPostureShirt(BitmapFactory.decodeResource(ImageFactory.resources, R.drawable.school_shirt_purple), sharedPreferences.getInt("schoolShirtPurple", 0)))
             schoolPostureShirts.forEach {
                 if (it.status == 2){
                     it.addToDrawQueue()
@@ -120,6 +121,7 @@ class UserData {
 
             schoolPostureSkirts.add(SchoolPostureSkirt(BitmapFactory.decodeResource(ImageFactory.resources, R.drawable.school_skirt_pink), sharedPreferences.getInt("schoolSkirtPink", 0)))
             schoolPostureSkirts.add(SchoolPostureSkirt(BitmapFactory.decodeResource(ImageFactory.resources, R.drawable.school_skirt_blue), sharedPreferences.getInt("schoolSkirtBlue", 0)))
+            schoolPostureSkirts.add(SchoolPostureSkirt(BitmapFactory.decodeResource(ImageFactory.resources, R.drawable.school_skirt_purple), sharedPreferences.getInt("schoolSkirtPurple", 0)))
             schoolPostureSkirts.forEach {
                 if (it.status == 2){
                     it.addToDrawQueue()
@@ -129,6 +131,7 @@ class UserData {
 
             schoolPostureStockings.add(SchoolPostureStockings(BitmapFactory.decodeResource(ImageFactory.resources, R.drawable.school_stockings_white), sharedPreferences.getInt("schoolStockingsWhite", 0)))
             schoolPostureStockings.add(SchoolPostureStockings(BitmapFactory.decodeResource(ImageFactory.resources, R.drawable.school_stockings_blue), sharedPreferences.getInt("schoolStockingsBlue", 0)))
+            schoolPostureStockings.add(SchoolPostureStockings(BitmapFactory.decodeResource(ImageFactory.resources, R.drawable.school_stockings_purple), sharedPreferences.getInt("schoolStockingsPurple", 0)))
             schoolPostureStockings.forEach {
                 if (it.status == 2){
                     it.addToDrawQueue()
@@ -179,12 +182,15 @@ class UserData {
         private fun saveSchoolPostureData(editor: SharedPreferences.Editor){
             editor.putInt("schoolShirtWhite", schoolPostureShirts[0].status)
             editor.putInt("schoolShirtBlue", schoolPostureShirts[1].status)
+            editor.putInt("schoolShirtPurple", schoolPostureShirts[2].status)
 
             editor.putInt("schoolSkirtPink", schoolPostureSkirts[0].status)
             editor.putInt("schoolSkirtBlue", schoolPostureSkirts[1].status)
+            editor.putInt("schoolSkirtPurple", schoolPostureSkirts[2].status)
 
             editor.putInt("schoolStockingsWhite", schoolPostureStockings[0].status)
             editor.putInt("schoolStockingsBlue", schoolPostureStockings[1].status)
+            editor.putInt("schoolStockingsPurple", schoolPostureStockings[2].status)
         }
 
         private fun saveDefaultPostureData(editor: SharedPreferences.Editor){

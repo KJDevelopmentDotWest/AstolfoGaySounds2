@@ -44,6 +44,16 @@
                         android:scaleType="centerInside"
                         app:srcCompat="@drawable/school_shirt_blue"/>
 
+                    <ImageButton
+                        android:id="@+id/schoolShirtPurple"
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:backgroundTint="@color/pink"
+                        android:scaleType="centerInside"
+                        app:srcCompat="@drawable/school_shirt_purple"/>
+
                 </LinearLayout>
 
             </HorizontalScrollView>
@@ -77,6 +87,16 @@
                         android:scaleType="centerInside"
                         app:srcCompat="@drawable/school_skirt_blue"/>
 
+                    <ImageButton
+                        android:id="@+id/schoolSkirtPurple"
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:backgroundTint="@color/pink"
+                        android:scaleType="centerInside"
+                        app:srcCompat="@drawable/school_skirt_purple"/>
+
                 </LinearLayout>
 
             </HorizontalScrollView>
@@ -109,6 +129,16 @@
                         android:backgroundTint="@color/pink"
                         android:scaleType="centerInside"
                         app:srcCompat="@drawable/school_stockings_blue"/>
+
+                    <ImageButton
+                        android:id="@+id/schoolStockingsPurple"
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:backgroundTint="@color/pink"
+                        android:scaleType="centerInside"
+                        app:srcCompat="@drawable/school_stockings_purple"/>
 
                 </LinearLayout>
 
