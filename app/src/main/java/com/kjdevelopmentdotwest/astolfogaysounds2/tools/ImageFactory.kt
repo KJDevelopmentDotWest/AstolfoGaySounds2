@@ -48,7 +48,7 @@ class ImageFactory() {
 
             //val ratio = deviceHeight.toFloat().div(resources[0].res.height).times(0.9) //??
 
-            val ratio = deviceWidth.toFloat().div(resources[0].res.width).times(0.975)
+            val ratio = deviceWidth.toFloat().div(resources[0].res.width).times(0.985)
 
             val result = Bitmap.createBitmap(deviceWidth, deviceHeight, Bitmap.Config.ARGB_8888)
             val canvas = Canvas(result)

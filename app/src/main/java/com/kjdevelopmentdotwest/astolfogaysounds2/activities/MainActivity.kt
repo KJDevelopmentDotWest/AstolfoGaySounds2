@@ -128,22 +128,22 @@ class MainActivity : AppCompatActivity() {
 
         when {
             ratio <= 16.0.div(9.0) -> {
-                layoutParams.setMargins(0, 25, 0, 0)
+                layoutParams.setMargins(0, 20, 0, 0)
             }
             ratio <= 17.0.div(9.0) -> {
-                layoutParams.setMargins(0, 150, 0, 0)
+                layoutParams.setMargins(0, 120, 0, 0)
             }
             ratio <= 18.0.div(9.0) -> {
-                layoutParams.setMargins(0, 250, 0, 0)
+                layoutParams.setMargins(0, 200, 0, 0)
             }
             ratio <= 19.0.div(9.0) -> {
-                layoutParams.setMargins(0, 350, 0, 0)
+                layoutParams.setMargins(0, 230, 0, 0)
             }
             ratio <= 20.0.div(9.0) -> {
-                layoutParams.setMargins(0, 450, 0, 0)
+                layoutParams.setMargins(0, 340, 0, 0)
             }
             else -> {
-                layoutParams.setMargins(0, 600, 0, 0)
+                layoutParams.setMargins(0, 450, 0, 0)
             }
         }
         mainImage.layoutParams = layoutParams
