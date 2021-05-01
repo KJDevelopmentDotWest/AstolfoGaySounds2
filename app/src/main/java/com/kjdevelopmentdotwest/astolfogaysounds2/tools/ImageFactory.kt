@@ -6,33 +6,34 @@ import android.graphics.Canvas
 import android.util.DisplayMetrics
 
 
-class ImageFactory {
+class ImageFactory() {
+
     companion object{
 
-        var imageWidth: Int = 0
-        var imageHeight: Int = 0
+        var deviceWidth: Int = 0
+        var deviceHeight: Int = 0
         var displayMetrics: DisplayMetrics? = null
         var resultImage: Bitmap? = null
         var resultBackground: Bitmap? = null
         var resources: Resources? = null
 
-        private fun getRes(){
-            imageWidth = displayMetrics!!.widthPixels
-            imageHeight = displayMetrics!!.heightPixels - (24 + 26) * displayMetrics!!.density.toInt() // 24dp status bar 26dp clicks info
+        fun getRes(){
+            deviceWidth = displayMetrics!!.widthPixels
+            deviceHeight = displayMetrics!!.heightPixels - (24 + 26) * displayMetrics!!.density.toInt() // 24dp status bar 26dp clicks info
         }
 
         @Deprecated("")
         fun scaleBitmap(src: Bitmap) {
-            if (imageWidth <= 0 || imageHeight <= 0) {
+            if (deviceWidth <= 0 || deviceHeight <= 0) {
                 getRes()
             }
 
-            val result = Bitmap.createBitmap(imageWidth, imageHeight, Bitmap.Config.ARGB_8888)
+            val result = Bitmap.createBitmap(deviceWidth, deviceHeight, Bitmap.Config.ARGB_8888)
             val canvas = Canvas(result)
 
-            canvas.drawBitmap(Bitmap.createScaledBitmap(src, imageWidth, imageHeight, true), 0f, 0f, null)
+            canvas.drawBitmap(Bitmap.createScaledBitmap(src, deviceWidth, deviceHeight, true), 0f, 0f, null)
 
-            resultImage = Bitmap.createScaledBitmap(src, imageWidth, imageHeight, true)
+            resultImage = Bitmap.createScaledBitmap(src, deviceWidth, deviceHeight, true)
         }
 
         fun mergeScaleBitmaps(resources: ArrayList<Item>){
@@ -45,9 +46,11 @@ class ImageFactory {
                 tempCanvas.drawBitmap(it.res, finalOffsetLeft, finalOffsetTop, null)
             }
 
-            val ratio = imageHeight.toFloat().div(resources[0].res.height).times(0.95) //??
+            //val ratio = deviceHeight.toFloat().div(resources[0].res.height).times(0.9) //??
 
-            val result = Bitmap.createBitmap(imageWidth, imageHeight, Bitmap.Config.ARGB_8888)
+            val ratio = deviceWidth.toFloat().div(resources[0].res.width).times(0.975)
+
+            val result = Bitmap.createBitmap(deviceWidth, deviceHeight, Bitmap.Config.ARGB_8888)
             val canvas = Canvas(result)
 
             canvas.drawBitmap(Bitmap.createScaledBitmap(preResult, resources[0].res.width.times(ratio).toInt(), resources[0].res.height.times(ratio).toInt(), true), 0f, 0f, null)
@@ -56,14 +59,14 @@ class ImageFactory {
         }
 
         fun generatePreview(src: Bitmap): Bitmap{
-            if (imageWidth <= 0 || imageHeight <= 0){
+            if (deviceWidth <= 0 || deviceHeight <= 0){
                 getRes()
             }
 
-            val result = Bitmap.createBitmap((imageWidth /2.1).toInt(), (imageHeight /2.1).toInt(), Bitmap.Config.ARGB_8888)
+            val result = Bitmap.createBitmap((deviceWidth /2.1).toInt(), (deviceHeight /2.1).toInt(), Bitmap.Config.ARGB_8888)
             val canvas = Canvas(result)
 
-            canvas.drawBitmap(Bitmap.createScaledBitmap(src, (imageWidth /2.1).toInt(), (imageHeight /2.1).toInt(), true), 0f, 0f, null)
+            canvas.drawBitmap(Bitmap.createScaledBitmap(src, (deviceWidth /2.1).toInt(), (deviceHeight /2.1).toInt(), true), 0f, 0f, null)
 
             return result
         }

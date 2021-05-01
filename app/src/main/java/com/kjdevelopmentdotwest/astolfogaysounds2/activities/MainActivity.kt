@@ -3,24 +3,22 @@ package com.kjdevelopmentdotwest.astolfogaysounds2.activities
 import android.Manifest
 import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
 import android.content.pm.PackageManager
-import android.graphics.BitmapFactory
 import android.media.AudioManager
 import android.media.MediaPlayer
 import android.os.Bundle
+import android.print.PrintAttributes
 import android.util.DisplayMetrics
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.TextView
+import android.view.ViewGroup
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
-import com.kjdevelopmentdotwest.astolfogaysounds2.tools.ImageFactory
 import com.kjdevelopmentdotwest.astolfogaysounds2.R
 import com.kjdevelopmentdotwest.astolfogaysounds2.skins.*
 import com.kjdevelopmentdotwest.astolfogaysounds2.skins.schoolPosture.SchoolPosture
+import com.kjdevelopmentdotwest.astolfogaysounds2.tools.ImageFactory
 import com.kjdevelopmentdotwest.astolfogaysounds2.tools.UserData
 
 class MainActivity : AppCompatActivity() {
@@ -44,9 +42,8 @@ class MainActivity : AppCompatActivity() {
         checkPermissions() //check for permissions
         setUpImageFactory() //initialize necessary variables for ImageFactory class
         setUpUserData() // retrieve user info from storage and draw saved image
+        changeMainImageMargin()
         googleAccountCheck()
-
-
     }
 
     private fun checkPermissions(){
@@ -97,26 +94,59 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setUpImageFactory(){
-
-        if (ImageFactory.displayMetrics == null){
-            val displayMetrics = DisplayMetrics()
-            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.R) {
-                val display = this.display
-                display?.getRealMetrics(displayMetrics)
-            } else {
-                @Suppress("DEPRECATION")
-                val display = this.windowManager.defaultDisplay
-                @Suppress("DEPRECATION")
-                display.getMetrics(displayMetrics)
-            }
-            ImageFactory.displayMetrics = displayMetrics
-            ImageFactory.resources = resources
+        val displayMetrics = DisplayMetrics()
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.R) {
+            val display = this.display
+            display?.getRealMetrics(displayMetrics)
+        } else {
+            @Suppress("DEPRECATION")
+            val display = this.windowManager.defaultDisplay
+            @Suppress("DEPRECATION")
+            display.getMetrics(displayMetrics)
         }
+        ImageFactory.displayMetrics = displayMetrics
+        ImageFactory.resources = resources
+        ImageFactory.getRes()
     }
 
     private fun setUpUserData(){
         val retrieveAndDrawThread = RetrieveUserDataAndDrawImageThread()
         retrieveAndDrawThread.start()
+    }
+
+    private fun googleAccountCheck(){
+        val account: GoogleSignInAccount? = GoogleSignIn.getLastSignedInAccount(this)
+        if (account == null){
+            //startActivity(Intent(this, SignInActivity::class.java))
+        }
+    }
+
+    private fun changeMainImageMargin(){
+        val ratio = ImageFactory.deviceHeight.toDouble().div(ImageFactory.deviceWidth)
+
+        val layoutParams = mainImage.layoutParams as LinearLayout.LayoutParams
+
+        when {
+            ratio <= 16.0.div(9.0) -> {
+                layoutParams.setMargins(0, 25, 0, 0)
+            }
+            ratio <= 17.0.div(9.0) -> {
+                layoutParams.setMargins(0, 150, 0, 0)
+            }
+            ratio <= 18.0.div(9.0) -> {
+                layoutParams.setMargins(0, 250, 0, 0)
+            }
+            ratio <= 19.0.div(9.0) -> {
+                layoutParams.setMargins(0, 350, 0, 0)
+            }
+            ratio <= 20.0.div(9.0) -> {
+                layoutParams.setMargins(0, 450, 0, 0)
+            }
+            else -> {
+                layoutParams.setMargins(0, 600, 0, 0)
+            }
+        }
+        mainImage.layoutParams = layoutParams
     }
 
     private fun onImageClicked(){
@@ -145,13 +175,6 @@ class MainActivity : AppCompatActivity() {
             }
 
             mediaPlayer.start()
-        }
-    }
-
-    private fun googleAccountCheck(){
-        val account: GoogleSignInAccount? = GoogleSignIn.getLastSignedInAccount(this)
-        if (account == null){
-            //startActivity(Intent(this, SignInActivity::class.java))
         }
     }
 
