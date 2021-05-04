@@ -231,19 +231,6 @@ class MainActivity : AppCompatActivity() {
                 } else {
                     muteButton.setImageResource(R.drawable.ic_button_unmute)
                 }
-//                if (SchoolPosture.status == 2){
-//                    SchoolPosture.draw()
-//                }
-//                if (FormalPosture.status == 2){
-//                    FormalPosture.draw()
-//                }
-////                if (CasualPosture.status == 2){
-////                    CasualPosture.drawCasual()
-////                }
-//                if (DefaultPosture.status == 2){
-//                    DefaultPosture.draw()
-//                }
-                //if (UserData.casualPostureStatus == 2)
                 if (UserData.defaultPostureStatus == 2) DefaultPosture.draw()
                 if (UserData.formalPostureStatus == 2) FormalPosture.draw()
                 if (UserData.schoolPostureStatus == 2) SchoolPosture.draw()
