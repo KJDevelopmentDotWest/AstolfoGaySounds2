@@ -128,19 +128,19 @@ class MainActivity : AppCompatActivity() {
         val layoutParams = mainImage.layoutParams as LinearLayout.LayoutParams
 
         when {
-            ratio <= 16.0.div(9.0) -> {
+            ratio <= 16.1.div(9.0) -> {
                 layoutParams.setMargins(0, 20, 0, 0)
             }
-            ratio <= 17.0.div(9.0) -> {
+            ratio <= 17.1.div(9.0) -> {
                 layoutParams.setMargins(0, 120, 0, 0)
             }
-            ratio <= 18.0.div(9.0) -> {
+            ratio <= 18.1.div(9.0) -> {
                 layoutParams.setMargins(0, 200, 0, 0)
             }
-            ratio <= 19.0.div(9.0) -> {
+            ratio <= 19.1.div(9.0) -> {
                 layoutParams.setMargins(0, 230, 0, 0)
             }
-            ratio <= 20.0.div(9.0) -> {
+            ratio <= 20.1.div(9.0) -> {
                 layoutParams.setMargins(0, 340, 0, 0)
             }
             else -> {
@@ -182,8 +182,8 @@ class MainActivity : AppCompatActivity() {
             if (UserData.clicksList.size >= 100){
                 UserData.clicksList.removeAt(0)
                 UserData.clicksList.add(System.nanoTime())
-                if (UserData.clicksList.last().minus(UserData.clicksList.first()) <= 129238960130040L){
-                    //UserData.clickAchievement = true
+                if (UserData.clicksList.last().minus(UserData.clicksList.first()) <= 129000000000000L){
+                    UserData.clickAchievement = true
                     Toast.makeText(this, "${UserData.clicksList.last().minus(UserData.clicksList.first())}", Toast.LENGTH_SHORT).show()
                 }
             } else {
