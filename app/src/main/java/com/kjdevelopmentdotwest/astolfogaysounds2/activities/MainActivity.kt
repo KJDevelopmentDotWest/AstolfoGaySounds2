@@ -7,6 +7,7 @@ import android.content.pm.PackageManager
 import android.media.AudioManager
 import android.media.MediaPlayer
 import android.os.Bundle
+import android.os.SystemClock
 import android.print.PrintAttributes
 import android.util.DisplayMetrics
 import android.view.ViewGroup
@@ -153,7 +154,7 @@ class MainActivity : AppCompatActivity() {
         UserData.clickCount++
         clickCountTextView.text = UserData.clickCount.toString()
         UserData.moneyCount++
-        UserData.moneyCount = 1000000
+        //UserData.moneyCount = 1000000 //to be removed
         moneyCountTextView.text = UserData.moneyCount.toString()
 
         if (!mediaPlayer.isPlaying){
@@ -175,6 +176,19 @@ class MainActivity : AppCompatActivity() {
             }
 
             mediaPlayer.start()
+        }
+
+        if (!UserData.clickAchievement){
+            if (UserData.clicksList.size >= 100){
+                UserData.clicksList.removeAt(0)
+                UserData.clicksList.add(System.nanoTime())
+                if (UserData.clicksList.last().minus(UserData.clicksList.first()) <= 129238960130040L){
+                    //UserData.clickAchievement = true
+                    Toast.makeText(this, "${UserData.clicksList.last().minus(UserData.clicksList.first())}", Toast.LENGTH_SHORT).show()
+                }
+            } else {
+                UserData.clicksList.add(System.currentTimeMillis())
+            }
         }
     }
 
