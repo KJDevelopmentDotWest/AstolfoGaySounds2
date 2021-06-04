@@ -7,10 +7,7 @@ import android.content.pm.PackageManager
 import android.media.AudioManager
 import android.media.MediaPlayer
 import android.os.Bundle
-import android.os.SystemClock
-import android.print.PrintAttributes
 import android.util.DisplayMetrics
-import android.view.ViewGroup
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -43,7 +40,7 @@ class MainActivity : AppCompatActivity() {
         checkPermissions() //check for permissions
         setUpImageFactory() //initialize necessary variables for ImageFactory class
         setUpUserData() // retrieve user info from storage and draw saved image
-        changeMainImageMargin()
+        //changeMainImageMargin()
         googleAccountCheck()
     }
 
@@ -122,39 +119,11 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun changeMainImageMargin(){
-        val ratio = ImageFactory.deviceHeight.toDouble().div(ImageFactory.deviceWidth)
-
-        val layoutParams = mainImage.layoutParams as LinearLayout.LayoutParams
-
-        when {
-            ratio <= 16.1.div(9.0) -> {
-                layoutParams.setMargins(0, 20, 0, 0)
-            }
-            ratio <= 17.1.div(9.0) -> {
-                layoutParams.setMargins(0, 120, 0, 0)
-            }
-            ratio <= 18.1.div(9.0) -> {
-                layoutParams.setMargins(0, 200, 0, 0)
-            }
-            ratio <= 19.1.div(9.0) -> {
-                layoutParams.setMargins(0, 230, 0, 0)
-            }
-            ratio <= 20.1.div(9.0) -> {
-                layoutParams.setMargins(0, 340, 0, 0)
-            }
-            else -> {
-                layoutParams.setMargins(0, 450, 0, 0)
-            }
-        }
-        mainImage.layoutParams = layoutParams
-    }
-
     private fun onImageClicked(){
         UserData.clickCount++
         clickCountTextView.text = UserData.clickCount.toString()
         UserData.moneyCount++
-        //UserData.moneyCount = 1000000 //to be removed
+        UserData.moneyCount = 1000000 //to be removed
         moneyCountTextView.text = UserData.moneyCount.toString()
 
         if (!mediaPlayer.isPlaying){

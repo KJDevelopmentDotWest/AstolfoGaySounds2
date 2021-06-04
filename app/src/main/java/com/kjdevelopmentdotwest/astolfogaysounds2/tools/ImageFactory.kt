@@ -46,11 +46,9 @@ class ImageFactory() {
                 tempCanvas.drawBitmap(it.res, finalOffsetLeft, finalOffsetTop, null)
             }
 
-            //val ratio = deviceHeight.toFloat().div(resources[0].res.height).times(0.9) //??
+            val ratio = deviceWidth.toFloat().div(resources[0].res.width).times(0.98)
 
-            val ratio = deviceWidth.toFloat().div(resources[0].res.width).times(0.985)
-
-            val result = Bitmap.createBitmap(deviceWidth, deviceHeight, Bitmap.Config.ARGB_8888)
+            val result = Bitmap.createBitmap(resources[0].res.width.times(ratio).toInt(), resources[0].res.height.times(ratio).toInt(), Bitmap.Config.ARGB_8888)
             val canvas = Canvas(result)
 
             canvas.drawBitmap(Bitmap.createScaledBitmap(preResult, resources[0].res.width.times(ratio).toInt(), resources[0].res.height.times(ratio).toInt(), true), 0f, 0f, null)
